@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Users.Api", "src\Services\GigiTrucks.Services.Users.Api\GigiTrucks.Services.Users.Api.csproj", "{FD30EBFF-FF59-4DD2-8739-D7DAECE0F02E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Users.Api", "src\Services\Users\GigiTrucks.Services.Users.Api\GigiTrucks.Services.Users.Api.csproj", "{FD30EBFF-FF59-4DD2-8739-D7DAECE0F02E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Users.Core", "src\Services\GigiTrucks.Services.Users.Core\GigiTrucks.Services.Users.Core.csproj", "{72EA128A-F831-46C4-B81F-AA86529195FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Users.Core", "src\Services\Users\GigiTrucks.Services.Users.Core\GigiTrucks.Services.Users.Core.csproj", "{72EA128A-F831-46C4-B81F-AA86529195FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Users.Shared", "src\Services\GigiTrucks.Services.Users.Shared\GigiTrucks.Services.Users.Shared.csproj", "{39E45484-AEB6-4EBD-B4F1-A3BF54637570}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Users.Shared", "src\Services\Users\GigiTrucks.Services.Users.Shared\GigiTrucks.Services.Users.Shared.csproj", "{39E45484-AEB6-4EBD-B4F1-A3BF54637570}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Users.Tests", "src\Services\GigiTrucks.Services.Users.Tests\GigiTrucks.Services.Users.Tests.csproj", "{81277083-3138-4737-824D-1E6CA6E54ADC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Users.Tests", "src\Services\Users\GigiTrucks.Services.Users.Tests\GigiTrucks.Services.Users.Tests.csproj", "{81277083-3138-4737-824D-1E6CA6E54ADC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services.Users", "Services.Users", "{3BFA9B40-7B1C-4512-B22E-AD98C5497C7F}"
 EndProject
