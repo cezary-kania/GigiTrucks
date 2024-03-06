@@ -6,10 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCore(builder.Configuration);
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.MapGet("/", () => "Hello Users!");
+
+app.MapPost("/sign-in", async (
+        [FromBody] SignIn command,
+        [FromServices] ISender sender) => await sender.Send(command))
+    .WithTags("Identity")
+    .WithName("Sign In")
+    .WithOpenApi();
 
 app.MapPost("/sign-up", async (
         [FromBody] SignUp command,

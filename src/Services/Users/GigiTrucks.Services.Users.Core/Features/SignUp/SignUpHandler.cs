@@ -19,7 +19,7 @@ public class SignUpHandler(IPasswordHasher<User> passwordHasher, IUserRepository
         {
             Id = Guid.NewGuid(),
             Email = request.Email,
-            Password = passwordHasher.HashPassword(default, request.Password)
+            Password = passwordHasher.HashPassword(new (), request.Password)
         };
         await userRepository.CreateAsync(user);
     }
