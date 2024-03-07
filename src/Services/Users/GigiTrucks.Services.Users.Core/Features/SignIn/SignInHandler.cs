@@ -13,7 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace GigiTrucks.Services.Users.Core.Features.SignIn;
 
-public class SignInHandler(
+internal sealed class SignInHandler(
     IPasswordHasher<User> passwordHasher,
     IUserRepository userRepository,
     IOptions<JwtSettings> jwtOptions,

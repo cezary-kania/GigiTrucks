@@ -2,7 +2,7 @@
 
 namespace GigiTrucks.Services.Users.Core.Repositories;
 
-public interface IUserRepository
+internal interface IUserRepository
 {
     Task<User?> GetAsync(string email);
     Task CreateAsync(User user);

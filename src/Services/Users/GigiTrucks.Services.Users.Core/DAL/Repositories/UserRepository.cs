@@ -1,17 +1,18 @@
-﻿using GigiTrucks.Services.Users.Core.Entities;
+﻿using GigiTrucks.Services.Users.Core.DAL.EntityFramework;
+using GigiTrucks.Services.Users.Core.Entities;
 using GigiTrucks.Services.Users.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace GigiTrucks.Services.Users.Core.DAL.Repositories;
 
-public class UserRepository : IUserRepository
+internal sealed class UserRepository(UsersDbContext dbContext) : IUserRepository
 {
-    private static IList<User> _users = new List<User>();
-    public Task<User?> GetAsync(string email) 
-        => Task.FromResult(_users.FirstOrDefault(user => user.Email == email));
+    public async Task<User?> GetAsync(string email)
+        => await dbContext.Users.SingleOrDefaultAsync(user => user.Email == email);
 
-    public Task CreateAsync(User user)
+    public async Task CreateAsync(User user)
     {
-        _users.Add(user);
-        return Task.CompletedTask;
+        await dbContext.Users.AddAsync(user);
+        await dbContext.SaveChangesAsync();
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GigiTrucks.Services.Users.Core.Features.SignUp;
 
-public class SignUpHandler(IPasswordHasher<User> passwordHasher, IUserRepository userRepository) : IRequestHandler<SignUp>
+internal sealed class SignUpHandler(IPasswordHasher<User> passwordHasher, IUserRepository userRepository) : IRequestHandler<SignUp>
 {
     public async Task Handle(SignUp request, CancellationToken cancellationToken)
     {
