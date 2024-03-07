@@ -1,0 +1,18 @@
+﻿version: '3.7'
+
+services:
+  db:
+    image: postgres
+    container_name: postgres-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=GiGiTrucks
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes: 
+  postgres_data:
