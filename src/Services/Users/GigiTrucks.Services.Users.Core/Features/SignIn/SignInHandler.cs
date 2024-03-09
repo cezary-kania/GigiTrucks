@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using FluentValidation;
 using GigiTrucks.Services.Users.Core.Auth;
 using GigiTrucks.Services.Users.Core.DTOs;
 using GigiTrucks.Services.Users.Core.Entities;
@@ -17,10 +18,12 @@ internal sealed class SignInHandler(
     IPasswordHasher<User> passwordHasher,
     IUserRepository userRepository,
     IOptions<JwtSettings> jwtOptions,
-    TimeProvider timeProvider) : IRequestHandler<SignIn, JwtDto>
+    TimeProvider timeProvider,
+    IValidator<SignIn> validator) : IRequestHandler<SignIn, JwtDto>
 {
     public async Task<JwtDto> Handle(SignIn request, CancellationToken cancellationToken)
     {
+        await validator.ValidateAndThrowAsync(request, cancellationToken);
         var user = await userRepository.GetAsync(request.Email);
         if (user is null || !IsPasswordValid(request.Password, user.Password))
         {

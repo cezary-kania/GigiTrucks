@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using FluentValidation;
 using GigiTrucks.Services.Users.Core.Auth;
 using GigiTrucks.Services.Users.Core.DAL.EntityFramework;
 using GigiTrucks.Services.Users.Core.DAL.Repositories;
@@ -17,6 +18,7 @@ public static class DependencyInjection
         this IServiceCollection services,
         ConfigurationManager configuration)
     {
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.Configure<JwtSettings>(configuration.GetSection(nameof(JwtSettings)));
         services.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
