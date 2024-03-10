@@ -41,3 +41,5 @@ app.MapPost("/sign-up", async (
     .WithName("Sign Up");
 
 app.Run();
+
+public partial class Program;

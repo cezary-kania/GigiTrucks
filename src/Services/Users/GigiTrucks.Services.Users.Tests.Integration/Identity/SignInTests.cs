@@ -7,26 +7,12 @@ using Xunit;
 
 namespace GigiTrucks.Services.Users.Tests.Identity;
 
-public class SignInTests
+public class SignInTests(UsersApiFactory factory) : IClassFixture<UsersApiFactory>
 {
-    private readonly HttpClient _client;
-    public SignInTests()
-    {
-        _client = new UsersApiFactory()
-            .WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureServices(services =>
-                {
-                    var fakeTimeProvider = new FakeTimeProvider();
-                    fakeTimeProvider.SetUtcNow(new DateTime(2024, 1, 1));
-                    services.AddSingleton(fakeTimeProvider);
-                });
-            })
-            .CreateClient();
-    }
+    private readonly HttpClient _client = factory.CreateClient();
 
     [Fact]
-    public async Task SignIn_ReturnsValidationError_WhenEmailIsEmpty()
+    public async Task SignIn_ShouldReturnValidationError_WhenEmailIsEmpty()
     {
         // Arrange
         var requestBody = new { Email = string.Empty, Password = "Test-Password" };
