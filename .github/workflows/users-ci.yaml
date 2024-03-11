@@ -23,5 +23,7 @@ jobs:
         run: dotnet build src/Services/Users/GigiTrucks.Services.Users.Tests.Integration/GigiTrucks.Services.Users.Tests.Integration.csproj --no-restore
 
       - name: Test
+        env:
+          JWTSETTINGS__SECRET: ${{ secrets.JWTSETTINGS__SECRET }}
         run: dotnet test src/Services/Users/GigiTrucks.Services.Users.Tests.Integration/GigiTrucks.Services.Users.Tests.Integration.csproj --no-build    
     
