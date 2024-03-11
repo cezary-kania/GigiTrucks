@@ -3,7 +3,7 @@
 on:
   push:
     paths:
-      - ".github/workflows/users/ci.yaml"
+      - ".github/workflows/users-ci.yaml"
       - "src/Services/Users/**"
 jobs:
   run-tests:
