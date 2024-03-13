@@ -4,6 +4,7 @@ using GigiTrucks.Services.Users.Core.Features.SignIn;
 using GigiTrucks.Services.Users.Core.Features.SignUp;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCore(builder.Configuration);
@@ -12,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
@@ -20,6 +23,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseExceptionHandler();
+app.UseSerilogRequestLogging();
 
 app.MapGet("/", () => "Hello Users!");
 
