@@ -1,7 +1,7 @@
 ﻿version: '3.7'
 
 services:
-  db:
+  postgres-db:
     image: postgres
     container_name: postgres-db
     restart: unless-stopped
@@ -13,6 +13,17 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  
+  mssql-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - "ACCEPT_EULA=Y"
+      - "SA_PASSWORD=${MSSQL_SA_PASSWORD}"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql/data
 
 volumes: 
   postgres_data:
+  mssql_data:
