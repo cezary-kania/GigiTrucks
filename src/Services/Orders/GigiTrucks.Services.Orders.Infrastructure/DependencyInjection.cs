@@ -1,4 +1,5 @@
-﻿using GigiTrucks.Services.Orders.Domain.Repositories;
+﻿using System.Reflection;
+using GigiTrucks.Services.Orders.Domain.Repositories;
 using GigiTrucks.Services.Orders.Infrastructure.DAL.EF;
 using GigiTrucks.Services.Orders.Infrastructure.DAL.EF.Interceptors;
 using GigiTrucks.Services.Orders.Infrastructure.DAL.Repositories;
@@ -6,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 namespace GigiTrucks.Services.Orders.Infrastructure;
 
 public static class DependencyInjection
@@ -23,6 +23,8 @@ public static class DependencyInjection
                 .UseSqlServer(configuration.GetConnectionString("OrdersDB"))
                 .AddInterceptors(sp.GetServices<ISaveChangesInterceptor>()));
         services.AddHostedService<DbInitializer>();
+        services.AddMediatR(cfg =>
+            cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
         return services;
     }
 }

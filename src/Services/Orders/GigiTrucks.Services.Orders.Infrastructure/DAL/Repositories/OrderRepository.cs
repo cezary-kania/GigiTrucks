@@ -15,5 +15,7 @@ internal sealed class OrderRepository(OrdersDbContext dbContext) : IOrderReposit
     }
 
     public async Task<Order?> GetAsync(OrderId orderId)
-        => await dbContext.Orders.FirstOrDefaultAsync(order => order.Id == orderId);
+        => await dbContext.Orders
+            .Include(o => o.OrderLines)
+            .FirstOrDefaultAsync(order => order.Id == orderId);
 }
