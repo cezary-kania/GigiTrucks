@@ -27,13 +27,20 @@ var ordersGroup = app.MapGroup("api/order")
     .WithTags("Orders");
 
 ordersGroup.MapGet("/{orderId:Guid}", async (
-        [FromRoute] Guid orderId,
+        [FromRoute]Guid orderId,
         [FromServices] ISender sender) =>
     {
         var orderDetails = await sender.Send(new GetOrder(orderId));
         return Results.Ok(orderDetails);
     })
     .WithName("Get Order")
+    .WithOpenApi();
+
+ordersGroup.MapPut("/{orderId:Guid}/approve", async (
+        [FromRoute]Guid orderId,
+        [FromServices] ISender sender) 
+        => await sender.Send(new ApproveOrder(orderId)))
+    .WithName("Approve Order")
     .WithOpenApi();
 
 app.Run();

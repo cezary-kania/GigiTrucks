@@ -6,5 +6,6 @@ namespace GigiTrucks.Services.Orders.Domain.Repositories;
 public interface IOrderRepository
 {
     Task AddAsync(Order order);
+    Task UpdateAsync(Order order);
     Task<Order?> GetAsync(OrderId orderId);
 }
