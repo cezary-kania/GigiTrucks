@@ -10,7 +10,7 @@ public class CurrentUserService(IHttpContextAccessor httpContextAccessor) : ICur
             httpContextAccessor.HttpContext?
                 .User?
                 .Claims?
-                .First(claim => claim.Type == ClaimTypes.Name)
+                .FirstOrDefault(claim => claim.Type == ClaimTypes.Name)?
                 .Value, out var userId
         ) ? userId : null;
 }

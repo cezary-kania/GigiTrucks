@@ -30,14 +30,15 @@ public class AuditableEntityInterceptor(
             {
                 continue;
             }
+            var userId = currentUserService.UserId ?? Guid.Empty;
             var utcNow = timeProvider.GetUtcNow();
             if (entry.State == EntityState.Added)
             {
                 entry.Entity.CreatedAt = utcNow;
-                entry.Entity.CreatedBy = currentUserService.UserId;
+                entry.Entity.CreatedBy = userId;
             }
             entry.Entity.LastModifiedAt = utcNow;
-            entry.Entity.LastModifiedBy = currentUserService.UserId;
+            entry.Entity.LastModifiedBy = userId;
         }
     }
 
