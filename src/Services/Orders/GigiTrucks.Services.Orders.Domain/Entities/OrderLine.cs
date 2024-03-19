@@ -1,8 +1,9 @@
-﻿using GigiTrucks.Services.Orders.Domain.ValueObjects;
+﻿using GigiTrucks.Services.Orders.Domain.Entities.Common;
+using GigiTrucks.Services.Orders.Domain.ValueObjects;
 
 namespace GigiTrucks.Services.Orders.Domain.Entities;
 
-public class OrderLine
+public class OrderLine : AuditableEntity
 {
     public OrderLineId Id {get;}
     public ProductId ProductId { get; }
