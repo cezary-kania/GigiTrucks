@@ -1,4 +1,4 @@
-﻿namespace GigiTrucks.Services.Orders.Application.Services;
+﻿namespace GigiTrucks.Services.Common.Identity;
 
 public interface ICurrentUserService
 {

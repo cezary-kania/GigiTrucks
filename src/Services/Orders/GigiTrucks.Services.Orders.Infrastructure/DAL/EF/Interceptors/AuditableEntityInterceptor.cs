@@ -1,4 +1,4 @@
-﻿using GigiTrucks.Services.Orders.Application.Services;
+﻿using GigiTrucks.Services.Common.Identity;
 using GigiTrucks.Services.Orders.Domain.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
