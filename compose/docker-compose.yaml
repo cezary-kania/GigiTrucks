@@ -16,6 +16,7 @@ services:
   
   mssql-db:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
     environment:
       - "ACCEPT_EULA=Y"
       - "SA_PASSWORD=${MSSQL_SA_PASSWORD}"
