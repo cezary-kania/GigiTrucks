@@ -2,7 +2,9 @@ using GigiTrucks.Services.Users.Api.Exceptions;
 using GigiTrucks.Services.Users.Core;
 using GigiTrucks.Services.Users.Core.Features.SignIn;
 using GigiTrucks.Services.Users.Core.Features.SignUp;
+using HealthChecks.UI.Client;
 using MediatR;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -16,6 +18,11 @@ builder.Services.AddProblemDetails();
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
 
+builder.Services.AddHealthChecks()
+    .AddNpgSql(
+        connectionString: builder.Configuration.GetConnectionString("Postgres")!,
+        name: "PostgreSQL/Users DB");
+
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
@@ -24,6 +31,11 @@ if (app.Environment.IsDevelopment())
 }
 app.UseExceptionHandler();
 app.UseSerilogRequestLogging();
+
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponseNoExceptionDetails
+});
 
 app.MapGet("/", () => "Hello Users!");
 
