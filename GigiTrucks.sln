@@ -52,6 +52,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F8645234
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Products.IntegrationTests", "src\Services\Products\Tests\GigiTrucks.Services.Products.IntegrationTests\GigiTrucks.Services.Products.IntegrationTests.csproj", "{1862C48C-A66C-4108-A4C4-78FF8B868A5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Newsletter.Application", "src\Services\Newsletter\GigiTrucks.Services.Newsletter.Application\GigiTrucks.Services.Newsletter.Application.csproj", "{A3F38EEA-F3F2-49F3-A8E8-06D830957B3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Newsletter.Infrastructure", "src\Services\Newsletter\GigiTrucks.Services.Newsletter.Infrastructure\GigiTrucks.Services.Newsletter.Infrastructure.csproj", "{A4000428-4136-4DE1-B164-6945161F04E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Newsletter.Domain", "src\Services\Newsletter\GigiTrucks.Services.Newsletter.Domain\GigiTrucks.Services.Newsletter.Domain.csproj", "{84FEDB7C-78FE-470A-A957-7453A3718466}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -134,6 +140,18 @@ Global
 		{1862C48C-A66C-4108-A4C4-78FF8B868A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1862C48C-A66C-4108-A4C4-78FF8B868A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1862C48C-A66C-4108-A4C4-78FF8B868A5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3F38EEA-F3F2-49F3-A8E8-06D830957B3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3F38EEA-F3F2-49F3-A8E8-06D830957B3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3F38EEA-F3F2-49F3-A8E8-06D830957B3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3F38EEA-F3F2-49F3-A8E8-06D830957B3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4000428-4136-4DE1-B164-6945161F04E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4000428-4136-4DE1-B164-6945161F04E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4000428-4136-4DE1-B164-6945161F04E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4000428-4136-4DE1-B164-6945161F04E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84FEDB7C-78FE-470A-A957-7453A3718466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84FEDB7C-78FE-470A-A957-7453A3718466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84FEDB7C-78FE-470A-A957-7453A3718466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84FEDB7C-78FE-470A-A957-7453A3718466}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FD30EBFF-FF59-4DD2-8739-D7DAECE0F02E} = {3BFA9B40-7B1C-4512-B22E-AD98C5497C7F}
@@ -160,5 +178,8 @@ Global
 		{C67F8DFB-7740-47EB-9239-DCEF0CAEE997} = {8CF37170-96CD-4D62-9CE7-198706585619}
 		{F8645234-45B2-461F-BA0A-549FB36A23C3} = {8CF37170-96CD-4D62-9CE7-198706585619}
 		{1862C48C-A66C-4108-A4C4-78FF8B868A5E} = {F8645234-45B2-461F-BA0A-549FB36A23C3}
+		{A3F38EEA-F3F2-49F3-A8E8-06D830957B3F} = {6C008BD9-9036-46F7-8202-94E75C9E2C20}
+		{A4000428-4136-4DE1-B164-6945161F04E4} = {6C008BD9-9036-46F7-8202-94E75C9E2C20}
+		{84FEDB7C-78FE-470A-A957-7453A3718466} = {6C008BD9-9036-46F7-8202-94E75C9E2C20}
 	EndGlobalSection
 EndGlobal
