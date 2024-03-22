@@ -8,12 +8,8 @@ public class ApproveOrderHandler(IOrderRepository orderRepository) : IRequestHan
 {
     public async Task Handle(ApproveOrder request, CancellationToken cancellationToken)
     {
-        var order = await orderRepository.GetAsync(request.OrderId);
-        
-        if (order is null)
-        {
-            throw new OrderNotFoundException(request.OrderId);
-        }
+        var order = await orderRepository.GetAsync(request.OrderId)
+                    ?? throw new OrderNotFoundException(request.OrderId);
         
         order.Approve();
         await orderRepository.UpdateAsync(order);
