@@ -1,5 +1,6 @@
 using GigiTrucks.Services.Orders.Application;
 using GigiTrucks.Services.Orders.Application.Commands.ApproveOrder;
+using GigiTrucks.Services.Orders.Application.Commands.CancelOrder;
 using GigiTrucks.Services.Orders.Infrastructure;
 using GigiTrucks.Services.Orders.Infrastructure.Queries.GetOrder;
 using HealthChecks.UI.Client;
@@ -51,9 +52,16 @@ ordersGroup.MapGet("/{orderId:Guid}", async (
 
 ordersGroup.MapPut("/{orderId:Guid}/approve", async (
         [FromRoute]Guid orderId,
-        [FromServices] ISender sender) 
+        [FromServices] ISender sender)
         => await sender.Send(new ApproveOrder(orderId)))
     .WithName("Approve Order")
+    .WithOpenApi();
+
+ordersGroup.MapPut("/{orderId:Guid}/cancel", async (
+        [FromRoute]Guid orderId,
+        [FromServices] ISender sender) 
+        => await sender.Send(new CancelOrder(orderId)))
+    .WithName("Cancel Order")
     .WithOpenApi();
 
 app.Run();
