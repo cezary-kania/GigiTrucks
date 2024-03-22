@@ -34,6 +34,28 @@ public class Order : AuditableEntity
 
     public void Approve()
     {
+        if (Status is OrderStatus.Approved or OrderStatus.Completed or OrderStatus.Canceled)
+        {
+            throw new InvalidOrderStatusChangeException(Id, OrderStatus.Approved);
+        }
         Status = OrderStatus.Approved;
+    }
+    
+    public void Complete()
+    {
+        if (Status is OrderStatus.Completed or OrderStatus.Canceled)
+        {
+            throw new InvalidOrderStatusChangeException(Id, OrderStatus.Completed);
+        }
+        Status = OrderStatus.Completed;
+    }
+    
+    public void Cancel()
+    {
+        if (Status is OrderStatus.Completed or OrderStatus.Canceled)
+        {
+            throw new InvalidOrderStatusChangeException(Id, OrderStatus.Canceled);
+        }
+        Status = OrderStatus.Canceled;
     }
 }
