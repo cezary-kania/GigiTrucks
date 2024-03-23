@@ -2,6 +2,7 @@ using GigiTrucks.Services.Orders.Application;
 using GigiTrucks.Services.Orders.Application.Commands.ApproveOrder;
 using GigiTrucks.Services.Orders.Application.Commands.CancelOrder;
 using GigiTrucks.Services.Orders.Infrastructure;
+using GigiTrucks.Services.Orders.Infrastructure.Health;
 using GigiTrucks.Services.Orders.Infrastructure.Queries.GetOrder;
 using HealthChecks.UI.Client;
 using MediatR;
@@ -11,9 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHealthChecks()
-    .AddSqlServer(
-        connectionString: builder.Configuration.GetConnectionString("OrdersDB")!,
-        name: "SQL Server/Orders DB");
+    .AddInfrastructureHealthChecks(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

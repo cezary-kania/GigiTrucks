@@ -12,7 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="8.0.0" />
       <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.0" />
       <PackageReference Include="MediatR" Version="12.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2" />

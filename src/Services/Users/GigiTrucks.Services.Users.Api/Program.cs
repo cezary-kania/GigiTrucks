@@ -2,6 +2,7 @@ using GigiTrucks.Services.Users.Api.Exceptions;
 using GigiTrucks.Services.Users.Core;
 using GigiTrucks.Services.Users.Core.Features.SignIn;
 using GigiTrucks.Services.Users.Core.Features.SignUp;
+using GigiTrucks.Services.Users.Core.Health;
 using HealthChecks.UI.Client;
 using MediatR;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -19,9 +20,7 @@ builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddHealthChecks()
-    .AddNpgSql(
-        connectionString: builder.Configuration.GetConnectionString("Postgres")!,
-        name: "PostgreSQL/Users DB");
+    .AddInfrastructureHealthChecks(builder.Configuration);
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
