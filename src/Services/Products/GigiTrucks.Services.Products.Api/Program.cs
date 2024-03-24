@@ -18,4 +18,6 @@ app.UseHttpsRedirection();
 
 app.MapGet("/", () => "Products");
 
+app.UseCore();
+
 app.Run();

@@ -12,7 +12,14 @@ public static class Extensions
         this IServiceCollection services,
         ConfigurationManager configuration)
     {
+        services.AddFeatures();
         services.AddProductsDb(configuration);
+        return services;
+    }
+    
+    public static WebApplication UseCore(this WebApplication services)
+    {
+        services.MapFeatures();
         return services;
     }
 }
