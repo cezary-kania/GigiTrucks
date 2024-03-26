@@ -1,8 +1,12 @@
-﻿using GigiTrucks.Services.Products.Core.DAL.EF;
+﻿using Azure.Storage;
+using GigiTrucks.Services.Products.Core.DAL.BlobStorage;
+using GigiTrucks.Services.Products.Core.DAL.EF;
 using GigiTrucks.Services.Products.Core.Features;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace GigiTrucks.Services.Products.Core;
 
@@ -12,6 +16,17 @@ public static class Extensions
         this IServiceCollection services,
         ConfigurationManager configuration)
     {
+        services.Configure<BlobStorageSettings>(configuration.GetSection(nameof(BlobStorageSettings)));
+        
+        services.AddAzureClients(clientBuilder =>
+        {
+            var blobSettings = services.BuildServiceProvider()
+                .GetRequiredService<IOptionsMonitor<BlobStorageSettings>>().CurrentValue;
+            
+            clientBuilder.AddBlobServiceClient(
+                new Uri(blobSettings.BlobUri),
+                new StorageSharedKeyCredential(blobSettings.StorageAccount, blobSettings.Key));
+        });
         services.AddFeatures();
         services.AddProductsDb(configuration);
         return services;
