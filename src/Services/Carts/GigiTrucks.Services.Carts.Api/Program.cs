@@ -57,7 +57,7 @@ cartGroup.MapPut("/{cartId:Guid}", async (
     }
 ).WithName("Update Cart");
 
-cartGroup.MapPatch("/{cartId:Guid}", async (
+cartGroup.MapPatch("/{cartId:Guid}/submit", async (
         [FromRoute] Guid cartId,
         [FromServices] ISender sender) =>
     {
