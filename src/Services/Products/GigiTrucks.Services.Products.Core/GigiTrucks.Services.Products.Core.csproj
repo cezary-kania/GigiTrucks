@@ -9,6 +9,7 @@
     <ItemGroup>
         <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
         <PackageReference Include="Carter" Version="8.0.0" />
+        <PackageReference Include="Mapster" Version="7.4.0" />
         <PackageReference Include="MediatR" Version="12.2.0"/>
         <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="8.0.0" />
         <PackageReference Include="FluentValidation" Version="11.9.0" />
