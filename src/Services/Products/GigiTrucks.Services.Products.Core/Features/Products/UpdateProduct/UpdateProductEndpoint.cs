@@ -17,6 +17,6 @@ public class UpdateProductEndpoint : ICarterModule
         {
             await sender.Send(command);
             return Results.NoContent();
-        }).WithName("AddProduct");
+        }).WithName("UpdateProduct");
     }
 }
