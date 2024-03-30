@@ -15,7 +15,6 @@ public class CreateProductEndpoint : ICarterModule
             [FromBody] CreateProductCommand command,
             [FromServices] ISender sender) =>
         {
-            var newProductId = Guid.NewGuid();
             await sender.Send(command);
             return Results.Created();
         }).WithName("AddProduct");
