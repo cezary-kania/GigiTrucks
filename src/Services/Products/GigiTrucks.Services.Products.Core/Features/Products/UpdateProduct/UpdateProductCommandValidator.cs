@@ -2,7 +2,7 @@
 
 namespace GigiTrucks.Services.Products.Core.Features.Products.UpdateProduct;
 
-public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
+internal sealed class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
 {
     public UpdateProductCommandValidator()
     {

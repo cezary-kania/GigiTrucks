@@ -15,8 +15,10 @@ public class CreateProductEndpoint : ICarterModule
             [FromBody] CreateProductCommand command,
             [FromServices] ISender sender) =>
         {
-            await sender.Send(command);
-            return Results.Created();
+            var result = await sender.Send(command);
+            return result.Match(
+                _ => Results.Created(),
+                error => Results.BadRequest(error.Value));
         }).WithName("AddProduct");
     }
 }

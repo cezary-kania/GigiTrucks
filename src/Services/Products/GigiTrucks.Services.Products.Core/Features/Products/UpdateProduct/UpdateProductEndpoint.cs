@@ -15,8 +15,11 @@ public class UpdateProductEndpoint : ICarterModule
             [FromBody] UpdateProductCommand command,
             [FromServices] ISender sender) =>
         {
-            await sender.Send(command);
-            return Results.NoContent();
+            var result = await sender.Send(command);
+            return result.Match(
+                _ => Results.NoContent(),
+                _ => Results.NotFound(),
+                error => Results.BadRequest(error.Value));
         }).WithName("UpdateProduct");
     }
 }

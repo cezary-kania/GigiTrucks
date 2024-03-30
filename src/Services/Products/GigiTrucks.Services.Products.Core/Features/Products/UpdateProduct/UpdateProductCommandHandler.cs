@@ -17,7 +17,12 @@ internal sealed class UpdateProductCommandHandler(
         UpdateProductCommand request, 
         CancellationToken cancellationToken)
     {
-        await validator.ValidateAsync(request, cancellationToken);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+        
+        if (!validationResult.IsValid)
+        {
+            return new Error<string>(validationResult.Errors.ToString()!);
+        }
 
         var product = await dbContext.Products
             .Include(x => x.Category)

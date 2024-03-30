@@ -14,7 +14,12 @@ internal sealed class CreateProductCommandHandler(
 {
     public async Task<OneOf<Success, Error<string>>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        await validator.ValidateAsync(request, cancellationToken);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+        {
+            return new Error<string>(validationResult.Errors.ToString()!);
+        }
 
         var category = await dbContext.Categories
             .FirstOrDefaultAsync(x => x.Id == request.CategoryId, cancellationToken);
