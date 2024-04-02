@@ -28,12 +28,6 @@ internal sealed class CreateCategoryCommandHandler(
         {
             return await CreateSubCategoryAsync(request, cancellationToken);
         }
-
-        var category = new Category
-        {
-            Id = Guid.NewGuid(),
-            Name = request.Name
-        };
         return await CreateNewCategoryAsync(request, cancellationToken);
     }
 
