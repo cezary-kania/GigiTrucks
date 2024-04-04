@@ -29,16 +29,16 @@ namespace GigiTrucks.Services.Products.Core.DAL.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CategoryId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("ParentCategoryId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories", "products");
                 });
@@ -96,9 +96,11 @@ namespace GigiTrucks.Services.Products.Core.DAL.EF.Migrations
 
             modelBuilder.Entity("GigiTrucks.Services.Products.Core.Entities.Category", b =>
                 {
-                    b.HasOne("GigiTrucks.Services.Products.Core.Entities.Category", null)
+                    b.HasOne("GigiTrucks.Services.Products.Core.Entities.Category", "ParentCategory")
                         .WithMany("SubCategories")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("ParentCategoryId");
+
+                    b.Navigation("ParentCategory");
                 });
 
             modelBuilder.Entity("GigiTrucks.Services.Products.Core.Entities.Image", b =>
