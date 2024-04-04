@@ -2,7 +2,7 @@
 
 namespace GigiTrucks.Services.Products.Core.Features.Products.CreateProduct;
 
-internal sealed class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+public sealed class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {
     public CreateProductCommandValidator()
     {
