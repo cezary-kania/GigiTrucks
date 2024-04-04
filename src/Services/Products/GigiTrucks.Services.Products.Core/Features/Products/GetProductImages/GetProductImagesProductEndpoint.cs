@@ -14,14 +14,15 @@ public class GetProductImagesProductEndpoint : ICarterModule
         app.MapGet("api/product/{productId:Guid}/images", async (
                 [FromRoute] Guid productId,
                 [FromServices] ISender sender) =>
-            {
-                var result = await sender.Send(
-                    new GetProductImagesProductQuery(productId));
+                {
+                    var result = await sender.Send(
+                        new GetProductImagesProductQuery(productId));
 
-                return result.Match(
-                    images => Results.Ok(images),
-                    _ => Results.NotFound());
-            })
-            .WithName("GetProductImages");
+                    return result.Match(
+                        images => Results.Ok(images),
+                        _ => Results.NotFound());
+                })
+            .WithName("GetProductImages")
+            .WithTags("Product");
     }
 }

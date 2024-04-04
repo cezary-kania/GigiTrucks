@@ -14,12 +14,14 @@ public class DeleteProductEndpoint : ICarterModule
         app.MapDelete("api/product/{productId:Guid}", async (
             [FromRoute] Guid productId,
             [FromServices] ISender sender) =>
-        {
-            var result = await sender.Send(new DeleteProductCommand(productId));
-            
-            return result.Match(
-                _ => Results.NoContent(),
-                _ => Results.NotFound());
-        }).WithName("DeleteProduct");
+            {
+                var result = await sender.Send(new DeleteProductCommand(productId));
+                
+                return result.Match(
+                    _ => Results.NoContent(),
+                    _ => Results.NotFound());
+            })
+        .WithName("DeleteProduct")
+        .WithTags("Product");
     }
 }

@@ -14,6 +14,7 @@ public class GetTopLevelCategoriesEndpoint : CarterModule
     {
         app.MapGet("/api/category", async ([FromServices] ISender sender) 
                 => Results.Ok(await sender.Send(new GetTopLevelCategoriesQuery())))
-            .WithName("GetTopLevelCategories");
+            .WithName("GetTopLevelCategories")
+            .WithTags("Category");
     }
 }

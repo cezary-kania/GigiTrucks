@@ -14,11 +14,13 @@ public class CreateProductEndpoint : ICarterModule
         app.MapPost("api/product", async (
             [FromBody] CreateProductCommand command,
             [FromServices] ISender sender) =>
-        {
-            var result = await sender.Send(command);
-            return result.Match(
-                _ => Results.Created(),
-                error => Results.BadRequest(error.Value));
-        }).WithName("AddProduct");
+            {
+                var result = await sender.Send(command);
+                return result.Match(
+                    _ => Results.Created(),
+                    error => Results.BadRequest(error.Value));
+            })
+        .WithName("AddProduct")
+        .WithTags("Product");
     }
 }

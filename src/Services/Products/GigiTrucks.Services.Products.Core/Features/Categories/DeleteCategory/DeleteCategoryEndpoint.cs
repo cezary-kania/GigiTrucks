@@ -15,12 +15,14 @@ public class DeleteCategoryEndpoint : CarterModule
         app.MapDelete("/api/category/{categoryId:Guid}", async (
             [FromRoute] Guid categoryId,
             [FromServices] ISender sender) =>
-        {
-            var result = await sender.Send(new DeleteCategoryCommand(categoryId));
-            return result.Match(
-                _ => Results.NoContent(),
-                _ => Results.NotFound(),
-                error => Results.BadRequest(error.Value));
-        }).WithName("DeleteCategory");
+            {
+                var result = await sender.Send(new DeleteCategoryCommand(categoryId));
+                return result.Match(
+                    _ => Results.NoContent(),
+                    _ => Results.NotFound(),
+                    error => Results.BadRequest(error.Value));
+            })
+        .WithName("DeleteCategory")
+        .WithTags("Category");
     }
 }

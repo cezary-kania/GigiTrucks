@@ -15,14 +15,15 @@ public class AddProductImageEndpoint : ICarterModule
             [FromRoute] Guid productId,
             [FromForm] IFormFile file,
             [FromServices] ISender sender) =>
-        {
-            var result = await sender.Send(new AddProductImageCommand(productId, file));
-            return result.Match(
-                _ => Results.Created(),
-                _ => Results.NotFound(),
-                error => Results.BadRequest(error.Value));
-        })
-            .WithName("AddProductImage")
-            .DisableAntiforgery();
+            {
+                var result = await sender.Send(new AddProductImageCommand(productId, file));
+                return result.Match(
+                    _ => Results.Created(),
+                    _ => Results.NotFound(),
+                    error => Results.BadRequest(error.Value));
+            })
+        .WithName("AddProductImage")
+        .WithTags("Product")
+        .DisableAntiforgery();
     }
 }

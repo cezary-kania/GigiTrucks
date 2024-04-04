@@ -14,12 +14,14 @@ public class UpdateProductEndpoint : ICarterModule
         app.MapPut("api/product", async (
             [FromBody] UpdateProductCommand command,
             [FromServices] ISender sender) =>
-        {
-            var result = await sender.Send(command);
-            return result.Match(
-                _ => Results.NoContent(),
-                _ => Results.NotFound(),
-                error => Results.BadRequest(error.Value));
-        }).WithName("UpdateProduct");
+            {
+                var result = await sender.Send(command);
+                return result.Match(
+                    _ => Results.NoContent(),
+                    _ => Results.NotFound(),
+                    error => Results.BadRequest(error.Value));
+            })
+        .WithName("UpdateProduct")
+        .WithTags("Product");
     }
 }

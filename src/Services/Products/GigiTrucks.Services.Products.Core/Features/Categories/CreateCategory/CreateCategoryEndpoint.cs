@@ -14,11 +14,13 @@ public class CreateCategoryEndpoint : CarterModule
         app.MapPost("/api/category", async (
             [FromBody] CreateCategoryCommand command,
             [FromServices] ISender sender) =>
-        {
-            var result = await sender.Send(command);
-            return result.Match(
-                _ => Results.Created(),
-                error => Results.BadRequest(error.Value));
-        }).WithName("CreateCategory");
+            {
+                var result = await sender.Send(command);
+                return result.Match(
+                    _ => Results.Created(),
+                    error => Results.BadRequest(error.Value));
+            })
+        .WithName("CreateCategory")
+        .WithTags("Category");
     }
 }
