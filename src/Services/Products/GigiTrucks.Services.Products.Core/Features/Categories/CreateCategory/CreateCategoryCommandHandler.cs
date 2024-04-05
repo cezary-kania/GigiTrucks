@@ -23,6 +23,11 @@ internal sealed class CreateCategoryCommandHandler(
         {
             return new Error<string>(validationResult.Errors.ToString()!);
         }
+        
+        if (await dbContext.Categories.AnyAsync(x => x.Name == request.Name, cancellationToken))
+        {
+            return new Error<string>("Category already exists.");
+        }
 
         if (request.ParentCategoryId is not null)
         {
