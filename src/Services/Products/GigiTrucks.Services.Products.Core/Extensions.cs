@@ -22,10 +22,7 @@ public static class Extensions
         {
             var blobSettings = services.BuildServiceProvider()
                 .GetRequiredService<IOptionsMonitor<BlobStorageSettings>>().CurrentValue;
-            
-            clientBuilder.AddBlobServiceClient(
-                new Uri(blobSettings.BlobUri),
-                new StorageSharedKeyCredential(blobSettings.StorageAccount, blobSettings.Key));
+            clientBuilder.AddBlobServiceClient(blobSettings.ConnectionString);
         });
         services.AddFeatures();
         services.AddProductsDb(configuration);
