@@ -42,7 +42,7 @@ internal sealed class CreateCategoryCommandHandler(
     {
         var category = new Category
         {
-            Id = Guid.NewGuid(),
+            Id = request.CategoryId,
             Name = request.Name
         };
         await dbContext.Categories.AddAsync(category, cancellationToken);
@@ -64,11 +64,12 @@ internal sealed class CreateCategoryCommandHandler(
         
         var newCategory = new Category
         {
-            Name = request.Name
+            Id = request.CategoryId,
+            Name = request.Name,
+            ParentCategory = parentCategory
         };
-        parentCategory.SubCategories.Add(newCategory);
         
-        dbContext.Categories.Update(parentCategory);
+        await dbContext.Categories.AddAsync(newCategory, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);
         return new Success();
     }

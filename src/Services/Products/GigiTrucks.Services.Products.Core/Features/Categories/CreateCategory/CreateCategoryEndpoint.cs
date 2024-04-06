@@ -7,17 +7,20 @@ using Microsoft.AspNetCore.Routing;
 
 namespace GigiTrucks.Services.Products.Core.Features.Categories.CreateCategory;
 
-public class CreateCategoryEndpoint : CarterModule
+public class CreateCategoryEndpoint : ICarterModule
 {
-    public override void AddRoutes(IEndpointRouteBuilder app)
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapPost("/api/category", async (
             [FromBody] CreateCategoryCommand command,
             [FromServices] ISender sender) =>
             {
-                var result = await sender.Send(command);
+                var newCategoryId = Guid.NewGuid();
+                var result = await sender.Send(command with { CategoryId = newCategoryId });
                 return result.Match(
-                    _ => Results.Created(),
+                    _ => Results.CreatedAtRoute("GetCategory", 
+                        new { categoryId = newCategoryId }, 
+                        newCategoryId),
                     error => Results.BadRequest(error.Value));
             })
         .WithName("CreateCategory")
