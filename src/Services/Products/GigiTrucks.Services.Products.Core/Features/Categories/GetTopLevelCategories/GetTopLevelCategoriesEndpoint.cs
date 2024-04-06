@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Routing;
 
 namespace GigiTrucks.Services.Products.Core.Features.Categories.GetTopLevelCategories;
 
-public class GetTopLevelCategoriesEndpoint : CarterModule
+public class GetTopLevelCategoriesEndpoint : ICarterModule
 {
-    public override void AddRoutes(IEndpointRouteBuilder app)
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapGet("/api/category", async ([FromServices] ISender sender) 
                 => Results.Ok(await sender.Send(new GetTopLevelCategoriesQuery())))

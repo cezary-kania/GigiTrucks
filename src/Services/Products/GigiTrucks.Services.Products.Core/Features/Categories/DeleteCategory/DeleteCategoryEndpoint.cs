@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Routing;
 
 namespace GigiTrucks.Services.Products.Core.Features.Categories.DeleteCategory;
 
-public class DeleteCategoryEndpoint : CarterModule
+public class DeleteCategoryEndpoint : ICarterModule
 {
-    public override void AddRoutes(IEndpointRouteBuilder app)
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapDelete("/api/category/{categoryId:Guid}", async (
             [FromRoute] Guid categoryId,
