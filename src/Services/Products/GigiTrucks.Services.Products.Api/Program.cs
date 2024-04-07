@@ -21,3 +21,5 @@ app.MapGet("/", () => "Products");
 app.UseCore();
 
 app.Run();
+
+public partial class Program;
