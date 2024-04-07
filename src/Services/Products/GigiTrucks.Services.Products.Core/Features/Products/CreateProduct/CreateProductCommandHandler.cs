@@ -10,9 +10,12 @@ namespace GigiTrucks.Services.Products.Core.Features.Products.CreateProduct;
 
 internal sealed class CreateProductCommandHandler(
     ProductsDbContext dbContext,
-    IValidator<CreateProductCommand> validator) : IRequestHandler<CreateProductCommand, OneOf<Success, Error<string>>>
+    IValidator<CreateProductCommand> validator) 
+    : IRequestHandler<CreateProductCommand, OneOf<Success, Error<string>>>
 {
-    public async Task<OneOf<Success, Error<string>>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    public async Task<OneOf<Success, Error<string>>> Handle(
+        CreateProductCommand request, 
+        CancellationToken cancellationToken)
     {
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
@@ -31,7 +34,7 @@ internal sealed class CreateProductCommandHandler(
         
         var product = new Product
         {
-            Id = Guid.NewGuid(),
+            Id = request.ProductId,
             Name = request.Name,
             Description = request.Description,
             Category = category

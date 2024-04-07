@@ -15,9 +15,13 @@ public class CreateProductEndpoint : ICarterModule
             [FromBody] CreateProductCommand command,
             [FromServices] ISender sender) =>
             {
-                var result = await sender.Send(command);
+                var newProductId = Guid.NewGuid();
+                var result = await sender.Send(command with { ProductId = newProductId });
                 return result.Match(
-                    _ => Results.Created(),
+                    _ => Results.CreatedAtRoute(
+                        "GetProduct", 
+                        new { productId = newProductId },
+                        newProductId),
                     error => Results.BadRequest(error.Value));
             })
         .WithName("AddProduct")
