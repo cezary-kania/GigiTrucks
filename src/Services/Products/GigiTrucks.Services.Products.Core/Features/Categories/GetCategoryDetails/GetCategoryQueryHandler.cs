@@ -17,6 +17,7 @@ internal sealed class GetCategoryQueryHandler(ProductsDbContext dbContext)
     {
         var category = await dbContext.Categories
             .Include(x => x.Products)
+            .Include(x => x.SubCategories)
             .FirstOrDefaultAsync(x => x.Id == request.CategoryId, cancellationToken);
 
         if (category is null)
