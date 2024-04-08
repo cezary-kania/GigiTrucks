@@ -17,11 +17,11 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore
-        run: dotnet restore src/Services/Products/Tests/GigiTrucks.Services.Products.IntegrationTests/GigiTrucks.Services.Users.IntegrationTests.csproj
+        run: dotnet restore src/Services/Products/Tests/GigiTrucks.Services.Products.IntegrationTests/GigiTrucks.Services.Products.IntegrationTests.csproj
 
       - name: Build
-        run: dotnet build src/Services/Products/Tests/GigiTrucks.Services.Products.IntegrationTests/GigiTrucks.Services.Users.IntegrationTests.csproj --no-restore
+        run: dotnet build src/Services/Products/Tests/GigiTrucks.Services.Products.IntegrationTests/GigiTrucks.Services.Products.IntegrationTests.csproj --no-restore
 
       - name: Test
-        run: dotnet test src/Services/Products/Tests/GigiTrucks.Services.Products.IntegrationTests/GigiTrucks.Services.Users.IntegrationTests.csproj --no-build    
+        run: dotnet test src/Services/Products/Tests/GigiTrucks.Services.Products.IntegrationTests/GigiTrucks.Services.Products.IntegrationTests.csproj --no-build    
     
