@@ -1,0 +1,27 @@
+﻿name: "products-ci"
+
+on:
+  push:
+    paths:
+      - ".github/workflows/products-ci.yaml"
+      - "src/Services/Products/**"
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore src/Services/Products/Tests/GigiTrucks.Services.Products.IntegrationTests/GigiTrucks.Services.Users.IntegrationTests.csproj
+
+      - name: Build
+        run: dotnet build src/Services/Products/Tests/GigiTrucks.Services.Products.IntegrationTests/GigiTrucks.Services.Users.IntegrationTests.csproj --no-restore
+
+      - name: Test
+        run: dotnet test src/Services/Products/Tests/GigiTrucks.Services.Products.IntegrationTests/GigiTrucks.Services.Users.IntegrationTests.csproj --no-build    
+    
