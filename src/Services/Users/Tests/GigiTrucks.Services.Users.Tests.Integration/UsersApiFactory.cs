@@ -1,8 +1,6 @@
-﻿using GigiTrucks.Services.Users.Core.DAL.EntityFramework;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,7 +8,7 @@ using Microsoft.Extensions.Time.Testing;
 using Testcontainers.PostgreSql;
 using Xunit;
 
-namespace GigiTrucks.Services.Users.Tests;
+namespace GigiTrucks.Services.Users.Tests.Integration;
 
 public class UsersApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {

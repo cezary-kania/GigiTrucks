@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 using FluentAssertions;
 using Xunit;
 
-namespace GigiTrucks.Services.Users.Tests.Identity;
+namespace GigiTrucks.Services.Users.Tests.Integration.Identity;
 
 public class SignUpTests(UsersApiFactory factory) : IClassFixture<UsersApiFactory>
 {

@@ -5,7 +5,7 @@ using FluentAssertions;
 using GigiTrucks.Services.Users.Core.DTOs;
 using Xunit;
 
-namespace GigiTrucks.Services.Users.Tests.Identity;
+namespace GigiTrucks.Services.Users.Tests.Integration.Identity;
 
 public class SignInTests(UsersApiFactory factory) : IClassFixture<UsersApiFactory>
 {
