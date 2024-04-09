@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 using FluentAssertions;
 using Xunit;
 
-namespace GigiTrucks.Services.Products.IntegrationTests.Categories;
+namespace GigiTrucks.Services.Products.Tests.Integration.Categories;
 
 public class DeleteCategoryTests(ProductsApiFactory factory) : IClassFixture<ProductsApiFactory>
 {

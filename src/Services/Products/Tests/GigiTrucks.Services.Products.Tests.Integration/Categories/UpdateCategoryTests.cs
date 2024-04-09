@@ -5,7 +5,7 @@ using FluentAssertions;
 using GigiTrucks.Services.Products.Core.DTOs.Categories;
 using Xunit;
 
-namespace GigiTrucks.Services.Products.IntegrationTests.Categories;
+namespace GigiTrucks.Services.Products.Tests.Integration.Categories;
 
 public class UpdateCategoryTests(ProductsApiFactory factory) : IClassFixture<ProductsApiFactory>
 {

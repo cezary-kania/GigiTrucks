@@ -13,7 +13,7 @@ using Testcontainers.Azurite;
 using Testcontainers.PostgreSql;
 using Xunit;
 
-namespace GigiTrucks.Services.Products.IntegrationTests;
+namespace GigiTrucks.Services.Products.Tests.Integration;
 
 public class ProductsApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {

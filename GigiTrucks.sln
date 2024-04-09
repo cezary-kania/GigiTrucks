@@ -44,7 +44,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Product
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F8645234-45B2-461F-BA0A-549FB36A23C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Products.IntegrationTests", "src\Services\Products\Tests\GigiTrucks.Services.Products.IntegrationTests\GigiTrucks.Services.Products.IntegrationTests.csproj", "{1862C48C-A66C-4108-A4C4-78FF8B868A5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Products.Tests.Integration", "src\Services\Products\Tests\GigiTrucks.Services.Products.Tests.Integration\GigiTrucks.Services.Products.Tests.Integration.csproj", "{1862C48C-A66C-4108-A4C4-78FF8B868A5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Newsletter.Application", "src\Services\Newsletter\GigiTrucks.Services.Newsletter.Application\GigiTrucks.Services.Newsletter.Application.csproj", "{A3F38EEA-F3F2-49F3-A8E8-06D830957B3F}"
 EndProject
