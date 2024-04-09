@@ -7,4 +7,5 @@ public class Product
     public string Description { get; set; } = null!;
     public Category? Category { get; set; }
     public ICollection<Image> Images { get; set; } = [];
+    public ICollection<Price> Prices { get; set; } = [];
 }
