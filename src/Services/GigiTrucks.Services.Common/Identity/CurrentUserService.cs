@@ -13,4 +13,11 @@ public class CurrentUserService(IHttpContextAccessor httpContextAccessor) : ICur
                 .FirstOrDefault(claim => claim.Type == ClaimTypes.Name)?
                 .Value, out var userId
         ) ? userId : null;
+    
+    public string? UserEmail =>
+        httpContextAccessor.HttpContext?
+            .User?
+            .Claims?
+            .FirstOrDefault(claim => claim.Type == ClaimTypes.Email)?
+            .Value;
 }
