@@ -1,5 +1,5 @@
 ﻿using GigiTrucks.Services.Orders.Domain.Entities.Common;
-using GigiTrucks.Services.Orders.Domain.ValueObjects;
+using GigiTrucks.Services.Orders.Domain.ValueTypes;
 
 namespace GigiTrucks.Services.Orders.Domain.Entities;
 

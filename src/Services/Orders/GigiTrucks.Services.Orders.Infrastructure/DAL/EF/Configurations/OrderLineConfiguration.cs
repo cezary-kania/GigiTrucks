@@ -1,5 +1,5 @@
 ﻿using GigiTrucks.Services.Orders.Domain.Entities;
-using GigiTrucks.Services.Orders.Domain.ValueObjects;
+using GigiTrucks.Services.Orders.Domain.ValueTypes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

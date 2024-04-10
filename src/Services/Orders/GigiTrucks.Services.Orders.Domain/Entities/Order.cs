@@ -1,7 +1,7 @@
 ﻿using GigiTrucks.Services.Orders.Domain.Entities.Common;
 using GigiTrucks.Services.Orders.Domain.Enums;
 using GigiTrucks.Services.Orders.Domain.Exceptions;
-using GigiTrucks.Services.Orders.Domain.ValueObjects;
+using GigiTrucks.Services.Orders.Domain.ValueTypes;
 
 namespace GigiTrucks.Services.Orders.Domain.Entities;
 

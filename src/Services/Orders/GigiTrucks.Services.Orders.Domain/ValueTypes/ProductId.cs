@@ -1,4 +1,4 @@
-﻿namespace GigiTrucks.Services.Orders.Domain.ValueObjects;
+﻿namespace GigiTrucks.Services.Orders.Domain.ValueTypes;
 
 public record struct ProductId(Guid Value)
 {

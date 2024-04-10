@@ -1,6 +1,6 @@
 ﻿using GigiTrucks.Services.Orders.Domain.Entities;
 using GigiTrucks.Services.Orders.Domain.Repositories;
-using GigiTrucks.Services.Orders.Domain.ValueObjects;
+using GigiTrucks.Services.Orders.Domain.ValueTypes;
 using GigiTrucks.Services.Orders.Infrastructure.DAL.EF;
 using Microsoft.EntityFrameworkCore;
 
