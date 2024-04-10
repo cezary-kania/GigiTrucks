@@ -23,7 +23,4 @@
     <ItemGroup>
       <ProjectReference Include="..\..\GigiTrucks.Services.Products.Api\GigiTrucks.Services.Products.Api.csproj" />
     </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Products\" />
-    </ItemGroup>
 </Project>
