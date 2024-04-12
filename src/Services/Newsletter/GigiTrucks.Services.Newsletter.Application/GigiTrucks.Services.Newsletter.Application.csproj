@@ -8,9 +8,15 @@
 
     <ItemGroup>
         <PackageReference Include="GigiTrucks.Services.Common" Version="1.0.4" />
+        <PackageReference Include="MassTransit" Version="8.2.0" />
         <PackageReference Include="MediatR" Version="12.2.0"/>
         <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GigiTrucks.Services.Newsletter.Contracts\GigiTrucks.Services.Newsletter.Contracts.csproj" />
+      <ProjectReference Include="..\GigiTrucks.Services.Newsletter.Domain\GigiTrucks.Services.Newsletter.Domain.csproj" />
     </ItemGroup>
 
 </Project>

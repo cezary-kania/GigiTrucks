@@ -1,6 +1,7 @@
 using GigiTrucks.Services.Common.Identity;
 using GigiTrucks.Services.Newsletter.Application.Commands.Subscribe;
 using GigiTrucks.Services.Newsletter.Application.Commands.Unsubscribe;
+using GigiTrucks.Services.Newsletter.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
@@ -26,11 +28,12 @@ app.MapPost("/subscribe", async (
         [FromServices] ISender sender) =>
     {
         var subscriberId = currentUserService.UserId;
-        if (subscriberId is null)
+        var subscriberEmail = currentUserService.UserEmail;
+        if (subscriberId is null || subscriberEmail is null)
         {
             return Results.Unauthorized();
         }
-        await sender.Send(new Subscribe(subscriberId.Value));
+        await sender.Send(new Subscribe(subscriberId.Value, subscriberEmail));
         return Results.NoContent();
     })
     .WithName("Subscribe")
