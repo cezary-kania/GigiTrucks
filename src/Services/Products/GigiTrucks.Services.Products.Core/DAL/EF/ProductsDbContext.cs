@@ -1,4 +1,5 @@
-﻿using GigiTrucks.Services.Products.Core.Entities;
+﻿using System.Reflection;
+using GigiTrucks.Services.Products.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace GigiTrucks.Services.Products.Core.DAL.EF;
@@ -11,6 +12,8 @@ internal sealed class ProductsDbContext(DbContextOptions<ProductsDbContext> opti
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.HasDefaultSchema("products");
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }
