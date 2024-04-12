@@ -18,9 +18,14 @@ public class Subscriber
         Email = email;
         IsActive = isActive;
     }
-    
-    public void UpdateSubscriptionStatus(SubscriptionStatus newStatus)
+
+    public void Subscribe()
     {
-        IsActive = newStatus;
+        IsActive = true;
+    }
+
+    public void Unsubscribe()
+    {
+        IsActive = false;
     }
 }

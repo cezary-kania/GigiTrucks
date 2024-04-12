@@ -12,6 +12,7 @@ public static class DependencyInjection
         ConfigurationManager configuration)
     {
         services.AddMessaging(configuration);
+        services.AddNewsletterDb(configuration);
         return services;
     }
 }
