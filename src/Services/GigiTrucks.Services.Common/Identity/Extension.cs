@@ -6,7 +6,7 @@ public static class Extensions
 {
     public static IServiceCollection AddCurrentUserService(this IServiceCollection services)
     {
-        services.AddSingleton<ICurrentUserService, CurrentUserService>();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
         return services;
     }
 }
