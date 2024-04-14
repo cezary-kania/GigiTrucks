@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GigiTrucks.Services.Newsletter.Domain.Repositories;
+using GigiTrucks.Services.Newsletter.Infrastructure.DAL.EF.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +15,7 @@ public static class Extensions
         var connectionString = configuration.GetConnectionString("Postgres");
         services.AddDbContext<NewsletterDbContext>(options => options.UseNpgsql(connectionString));
         services.AddHostedService<DbContextInitializer>();
+        services.AddScoped<ISubscriberRepository, SubscriberRepository>();
         return services;
     }
 }

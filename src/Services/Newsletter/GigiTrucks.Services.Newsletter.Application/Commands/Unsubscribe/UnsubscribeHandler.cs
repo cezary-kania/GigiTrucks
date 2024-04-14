@@ -13,9 +13,9 @@ public class UnsubscribeHandler(
     public async Task Handle(Unsubscribe request, CancellationToken cancellationToken)
     {
         var subscriber = await subscriberRepository.GetAsync(request.SubscriberId);
-        if (subscriber is null || !subscriber.IsActive)
+        if (subscriber is null)
         {
-            throw new NotSubscribedException(request.SubscriberId);
+            throw new SubscriberNotFoundException(request.SubscriberId);
         }
         
         subscriber.Unsubscribe();

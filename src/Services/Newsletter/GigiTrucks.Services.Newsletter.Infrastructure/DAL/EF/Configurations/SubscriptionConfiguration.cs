@@ -5,27 +5,20 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GigiTrucks.Services.Newsletter.Infrastructure.DAL.EF.Configurations;
 
-public class SubscriberConfiguration : IEntityTypeConfiguration<Subscriber>
+public class SubscriptionConfiguration : IEntityTypeConfiguration<Subscription>
 {
-    public void Configure(EntityTypeBuilder<Subscriber> builder)
+    public void Configure(EntityTypeBuilder<Subscription> builder)
     {
         builder.HasKey(x => x.Id);
-
-        builder.HasIndex(x => x.Email)
-            .IsUnique();
         
         builder.Property(x => x.Id)
             .IsRequired()
             .HasConversion(x => x.Value, 
-                x => new SubscriberId(x));
+                x => new SubscriptionId(x));
         
-        builder.Property(x => x.Email)
+        builder.Property(x => x.IsActive)
             .IsRequired()
             .HasConversion(x => x.Value, 
-                x => new Email(x));
-
-        builder.HasOne(x => x.Subscription)
-            .WithOne(x => x.Subscriber)
-            .HasForeignKey<Subscription>(x => x.SubscriberId);
+                x => new SubscriptionStatus(x));
     }
 }

@@ -9,7 +9,7 @@ public static class Extensions
 {
     public static IServiceCollection AddMessaging(this IServiceCollection services, ConfigurationManager configuration)
     {
-        services.Configure<RabbitMQSettings>(configuration.GetSection(nameof(RabbitMQSettings)));
+        services.Configure<RabbitMQSettings>(configuration.GetSection($"Messaging:{nameof(RabbitMQSettings)}"));
         var rabbitMQSetting = services.BuildServiceProvider().GetRequiredService<IOptions<RabbitMQSettings>>().Value;
         services.AddMassTransit(x =>
         {

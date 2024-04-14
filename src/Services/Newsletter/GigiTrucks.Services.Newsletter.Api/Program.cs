@@ -1,4 +1,5 @@
 using GigiTrucks.Services.Common.Identity;
+using GigiTrucks.Services.Newsletter.Application;
 using GigiTrucks.Services.Newsletter.Application.Commands.Subscribe;
 using GigiTrucks.Services.Newsletter.Application.Commands.Unsubscribe;
 using GigiTrucks.Services.Newsletter.Infrastructure;
@@ -9,7 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddInfrastructure(builder.Configuration);
+    
+builder.Services
+    .AddHttpContextAccessor()
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 

@@ -1,31 +1,50 @@
-﻿using GigiTrucks.Services.Newsletter.Domain.ValueTypes;
+﻿using GigiTrucks.Services.Newsletter.Domain.Exceptions;
+using GigiTrucks.Services.Newsletter.Domain.ValueTypes;
 
 namespace GigiTrucks.Services.Newsletter.Domain.Entities;
 
 public class Subscriber
 {
     public SubscriberId Id { get; }
+    public Subscription? Subscription { get; set; }
     public Email Email { get; private set; }
-    public SubscriptionStatus IsActive { get; private set; } = false;
     
     protected Subscriber()
     {
     }
 
-    public Subscriber(SubscriberId id, Email email, SubscriptionStatus isActive)
+    public Subscriber(SubscriberId id, Email email)
     {
         Id = id;
         Email = email;
-        IsActive = isActive;
     }
-
+    
+        
     public void Subscribe()
     {
-        IsActive = true;
+        if (HasActiveSubscription)
+        {
+            throw new AlreadySubscribedException();
+        }
+        
+        if (Subscription is null)
+        {
+            Subscription = new Subscription(SubscriptionId.Create(), Id, true);
+            return;
+        }
+        
+        Subscription.ChangeStatus(true);
     }
 
     public void Unsubscribe()
     {
-        IsActive = false;
+        if (!HasActiveSubscription)
+        {
+            throw new NotSubscribedException();
+        }
+        
+        Subscription?.ChangeStatus(false);
     }
+    
+    public SubscriptionStatus HasActiveSubscription => Subscription?.IsActive ?? false;
 }

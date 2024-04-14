@@ -8,6 +8,7 @@ namespace GigiTrucks.Services.Newsletter.Infrastructure.DAL.EF;
 internal sealed class NewsletterDbContext(DbContextOptions<NewsletterDbContext> options) : DbContext(options)
 {
     public DbSet<Subscriber> Subscribers { get; set; }
+    public DbSet<Subscription> Subscriptions { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
