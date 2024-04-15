@@ -28,6 +28,11 @@ public class Newsletter
         Status = status;
         Content = content;
         Title = title;
+        
+        if (status is PublicationStatus.ReadyToPublish)
+        {
+            ValidateMandatoryFieldsBeforePublish();
+        }
     }    
     
     public Newsletter(
@@ -38,24 +43,23 @@ public class Newsletter
         Id = id;
         PublishAt = publishAt;
         Status = status;
+
+        if (status is PublicationStatus.ReadyToPublish)
+        {
+            ValidateMandatoryFieldsBeforePublish();
+        }
     }
 
     public void Publish()
     {
         ValidatePublishStatus();
-
         Status = PublicationStatus.Published;
     }        
     
     public void Schedule(PublishAt publishAt)
     {
-        if (Content == string.Empty)
-        {
-            throw new CantPublishNewsletterWithEmptyContentException();
-        }
-        
         ValidatePublishStatus();
-
+        ValidateMandatoryFieldsBeforePublish();
         PublishAt = publishAt;
         Status = PublicationStatus.ReadyToPublish;
     }
@@ -75,5 +79,36 @@ public class Newsletter
         {
             throw new NewsletterAlreadyPublishedException();
         }
+    }    
+    
+    private void ValidateContent()
+    {
+        if (string.IsNullOrWhiteSpace(Content))
+        {
+            throw new CantPublishNewsletterWithEmptyContentException();
+        }
+    }    
+    
+    private void ValidateTitle()
+    {
+        if (string.IsNullOrWhiteSpace(Title))
+        {
+            throw new CantPublishNewsletterWithEmptyTitleException();
+        }
+    }    
+    
+    private void ValidatePublishDate()
+    {
+        if (PublishAt is null || PublishAt == DateTimeOffset.MinValue)
+        {
+            throw new PublishDateCantBeEmptyException();
+        }
+    }
+    
+    private void ValidateMandatoryFieldsBeforePublish()
+    {
+        ValidateTitle();
+        ValidateContent();
+        ValidatePublishDate();
     }
 }
