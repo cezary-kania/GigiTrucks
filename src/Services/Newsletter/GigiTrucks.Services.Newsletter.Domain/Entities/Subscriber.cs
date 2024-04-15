@@ -6,7 +6,7 @@ namespace GigiTrucks.Services.Newsletter.Domain.Entities;
 public class Subscriber
 {
     public SubscriberId Id { get; }
-    public Subscription? Subscription { get; set; }
+    public Subscription? Subscription { get; private set; }
     public Email Email { get; private set; }
     
     protected Subscriber()
@@ -18,7 +18,6 @@ public class Subscriber
         Id = id;
         Email = email;
     }
-    
         
     public void Subscribe()
     {
