@@ -9,6 +9,7 @@ internal sealed class NewsletterDbContext(DbContextOptions<NewsletterDbContext> 
 {
     public DbSet<Subscriber> Subscribers { get; set; }
     public DbSet<Subscription> Subscriptions { get; set; }
+    public DbSet<Domain.Entities.Newsletter> Newsletters { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -16,6 +16,7 @@ public static class Extensions
         services.AddDbContext<NewsletterDbContext>(options => options.UseNpgsql(connectionString));
         services.AddHostedService<DbContextInitializer>();
         services.AddScoped<ISubscriberRepository, SubscriberRepository>();
+        services.AddScoped<INewsletterRepository, NewsletterRepository>();
         return services;
     }
 }
