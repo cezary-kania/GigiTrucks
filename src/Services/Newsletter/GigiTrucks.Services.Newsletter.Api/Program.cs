@@ -1,7 +1,11 @@
 using GigiTrucks.Services.Common.Identity;
 using GigiTrucks.Services.Newsletter.Application;
+using GigiTrucks.Services.Newsletter.Application.Commands.CreateNewsletter;
+using GigiTrucks.Services.Newsletter.Application.Commands.ScheduleNewsletter;
 using GigiTrucks.Services.Newsletter.Application.Commands.Subscribe;
 using GigiTrucks.Services.Newsletter.Application.Commands.Unsubscribe;
+using GigiTrucks.Services.Newsletter.Application.Commands.UpdateNewsletter;
+using GigiTrucks.Services.Newsletter.Application.Queries.GetNewsletter;
 using GigiTrucks.Services.Newsletter.Application.Queries.GetSubscriptionStatus;
 using GigiTrucks.Services.Newsletter.Infrastructure;
 using MediatR;
@@ -77,6 +81,53 @@ app.MapGet("/subscription", async (
     })
     .WithName("GetSubscriptionStatus")
     .WithTags("Subscription")
+    .WithOpenApi();
+
+app.MapGet("/newsletter/{newsletterId:guid}", async (
+        [FromRoute] Guid newsletterId,
+        [FromServices] ISender sender) => 
+    {
+        var newsletter = await sender.Send(new GetNewsletter(newsletterId));
+        return Results.Ok(newsletter);
+    })
+    .WithName("GetNewsletter")
+    .WithTags("Newsletter")
+    .WithOpenApi();
+
+app.MapPost("/newsletter", async (
+        [FromBody] CreateNewsletter command,
+        [FromServices] ISender sender) =>
+    {
+        var newsletterId = Guid.NewGuid();
+        await sender.Send(command with { NewsletterId = newsletterId });
+        return Results.CreatedAtRoute("GetNewsletter", newsletterId);
+    })
+    .WithName("CreateNewsletter")
+    .WithTags("Newsletter")
+    .WithOpenApi();
+
+app.MapPut("/newsletter/{newsletterId:guid}", async (
+        [FromRoute] Guid newsletterId,
+        [FromBody] UpdateNewsletter command,
+        [FromServices] ISender sender) => 
+    {
+        await sender.Send(command with { NewsletterId = newsletterId });
+        return Results.Ok();
+    })
+    .WithName("UpdateNewsletter")
+    .WithTags("Newsletter")
+    .WithOpenApi();
+
+app.MapPatch("/newsletter/{newsletterId:guid}/schedule", async (
+        [FromRoute] Guid newsletterId,
+        [FromBody] ScheduleNewsletter command,
+        [FromServices] ISender sender) => 
+    {
+        await sender.Send(command with { NewsletterId = newsletterId });
+        return Results.Ok();
+    })
+    .WithName("ScheduleNewsletter")
+    .WithTags("Newsletter")
     .WithOpenApi();
 
 app.Run();
