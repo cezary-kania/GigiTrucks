@@ -2,6 +2,7 @@ using GigiTrucks.Services.Common.Identity;
 using GigiTrucks.Services.Newsletter.Application;
 using GigiTrucks.Services.Newsletter.Application.Commands.Subscribe;
 using GigiTrucks.Services.Newsletter.Application.Commands.Unsubscribe;
+using GigiTrucks.Services.Newsletter.Application.Queries.GetSubscriptionStatus;
 using GigiTrucks.Services.Newsletter.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,23 @@ app.MapDelete("/unsubscribe", async (
             return Results.NoContent();
     })
     .WithName("Unsubscribe")
+    .WithTags("Subscription")
+    .WithOpenApi();
+
+app.MapGet("/subscription", async (
+        [FromServices] ICurrentUserService currentUserService,
+        [FromServices] ISender sender) => 
+    {
+        var subscriberId = currentUserService.UserId;
+        if (subscriberId is null)
+        {
+            return Results.Unauthorized();
+        }
+
+        var subscriptionStatus = await sender.Send(new GetSubscriptionStatus(subscriberId.Value));
+        return Results.Ok(subscriptionStatus);
+    })
+    .WithName("GetSubscriptionStatus")
     .WithTags("Subscription")
     .WithOpenApi();
 
