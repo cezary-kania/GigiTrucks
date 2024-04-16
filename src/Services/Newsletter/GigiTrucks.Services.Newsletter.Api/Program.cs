@@ -42,6 +42,7 @@ app.MapPost("/subscribe", async (
         return Results.NoContent();
     })
     .WithName("Subscribe")
+    .WithTags("Subscription")
     .WithOpenApi();
 
 app.MapDelete("/unsubscribe", async (
@@ -57,6 +58,7 @@ app.MapDelete("/unsubscribe", async (
             return Results.NoContent();
     })
     .WithName("Unsubscribe")
+    .WithTags("Subscription")
     .WithOpenApi();
 
 app.Run();
