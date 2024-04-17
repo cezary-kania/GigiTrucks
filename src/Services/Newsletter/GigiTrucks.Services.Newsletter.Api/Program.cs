@@ -95,11 +95,10 @@ app.MapGet("/newsletter/{newsletterId:guid}", async (
     .WithOpenApi();
 
 app.MapPost("/newsletter", async (
-        [FromBody] CreateNewsletter command,
         [FromServices] ISender sender) =>
     {
         var newsletterId = Guid.NewGuid();
-        await sender.Send(command with { NewsletterId = newsletterId });
+        await sender.Send(new CreateNewsletter(newsletterId));
         return Results.CreatedAtRoute("GetNewsletter", newsletterId);
     })
     .WithName("CreateNewsletter")

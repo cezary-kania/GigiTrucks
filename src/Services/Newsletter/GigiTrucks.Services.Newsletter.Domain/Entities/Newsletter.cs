@@ -39,11 +39,9 @@ public class Newsletter
     
     public Newsletter(
         NewsletterId id,
-        PublishAt publishAt,
         PublicationStatus status)
     {
         Id = id;
-        PublishAt = publishAt;
         Status = status;
 
         if (status is PublicationStatus.ReadyToPublish)
