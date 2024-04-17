@@ -6,11 +6,12 @@ namespace GigiTrucks.Services.Newsletter.Domain.Entities;
 
 public class Newsletter
 {
+    private const string DefaultNewsletterTitle = "New Newsletter";
     public NewsletterId Id { get; }
     public PublicationStatus Status { get; private set; }
     public PublishAt? PublishAt { get; private set; }
     public NewsletterContent? Content { get; private set; }
-    public NewsletterTitle? Title { get; private set; }
+    public NewsletterTitle Title { get; private set; } = DefaultNewsletterTitle;
     
     protected Newsletter()
     {
@@ -29,6 +30,7 @@ public class Newsletter
         Content = content;
         Title = title;
         
+        ValidateTitle();
         if (status is PublicationStatus.ReadyToPublish)
         {
             ValidateMandatoryFieldsBeforePublish();
@@ -64,8 +66,9 @@ public class Newsletter
         Status = PublicationStatus.ReadyToPublish;
     }
 
-    public void UpdateContentAndTitle(NewsletterContent? content, NewsletterTitle? title)
+    public void UpdateContentAndTitle(NewsletterContent? content, NewsletterTitle title)
     {
+        ValidateTitle();
         ValidatePublishStatus();
         Content = content;
         Title = title;
@@ -93,7 +96,7 @@ public class Newsletter
     {
         if (string.IsNullOrWhiteSpace(Title))
         {
-            throw new CantPublishNewsletterWithEmptyTitleException();
+            throw new NewsletterTitleCantBeEmptyException();
         }
     }    
     

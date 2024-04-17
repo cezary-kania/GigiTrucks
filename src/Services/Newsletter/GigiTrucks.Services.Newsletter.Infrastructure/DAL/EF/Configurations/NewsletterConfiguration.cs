@@ -16,8 +16,9 @@ public class NewsletterConfiguration : IEntityTypeConfiguration<Domain.Entities.
                 x => new NewsletterId(x));
         
         builder.Property(x => x.Title)
+            .IsRequired()
             .HasConversion<string>(
-                x => x ?? string.Empty,
+                x => x.Value,
                 x => new NewsletterTitle(x));
         
         builder.Property(x => x.Content)
