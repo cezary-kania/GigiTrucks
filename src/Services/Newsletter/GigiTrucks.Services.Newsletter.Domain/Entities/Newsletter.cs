@@ -64,13 +64,12 @@ public class Newsletter
         Status = PublicationStatus.ReadyToPublish;
     }
 
-    public void UpdateContentAndTitle(NewsletterContent? content, NewsletterTitle title)
+    public void UpdateBody(NewsletterTitle title, NewsletterContent? content)
     {
-        ValidateTitle();
         ValidatePublishStatus();
-        Content = content;
+        ValidateTitle();
         Title = title;
-        PublishAt = null;
+        Content = content;
         Status = PublicationStatus.Draft;
     }
     
