@@ -2,4 +2,6 @@
 
 namespace GigiTrucks.Services.Newsletter.Application.Commands.ScheduleNewsletter;
 
-public record ScheduleNewsletter(Guid NewsletterId) : IRequest;
+public record ScheduleNewsletter(
+    Guid NewsletterId, 
+    DateTimeOffset PublishAt) : IRequest;
