@@ -9,17 +9,19 @@ public class Order : AuditableEntity
 {
     public OrderId Id { get; }
     public OrderStatus Status { get; private set; }
+    public Currency Currency { get; private set; }
     public IList<OrderLine> OrderLines { get; } = new List<OrderLine>();
 
     protected Order()
     {
     }
 
-    public Order(OrderId id, IList<OrderLine> orderLines)
+    public Order(OrderId id, Currency currency, IList<OrderLine> orderLines)
     {
         Id = id;
         OrderLines = orderLines;
         Status = OrderStatus.Created;
+        Currency = currency;
     }
 
     public void AddOrderLine(OrderLine orderLine)

@@ -21,9 +21,13 @@ public class OrderLineConfiguration : IEntityTypeConfiguration<OrderLine>
                 x => new ProductId(x));
 
         builder.Property(x => x.UnitPrice)
-            .IsRequired();
+            .IsRequired()
+            .HasPrecision(10, 2)
+            .HasConversion(x => x.Value,
+                x => new UnitPrice(x));
 
         builder.Property(x => x.Quantity)
-            .IsRequired();
+            .HasConversion(x => x.Value,
+                x => new Quantity(x));
     }
 }

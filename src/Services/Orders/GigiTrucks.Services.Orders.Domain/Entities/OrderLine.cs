@@ -7,15 +7,15 @@ public class OrderLine : AuditableEntity
 {
     public OrderLineId Id {get;}
     public ProductId ProductId { get; }
-    public decimal UnitPrice { get; }
-    public int Quantity { get; }
+    public UnitPrice UnitPrice { get; }
+    public Quantity Quantity { get; }
 
 
     protected OrderLine()
     {
     }
     
-    public OrderLine(OrderLineId id, ProductId productId, decimal unitPrice, int quantity)
+    public OrderLine(OrderLineId id, ProductId productId, UnitPrice unitPrice, Quantity quantity)
     {
         Id = id;
         ProductId = productId;
