@@ -1,3 +1,3 @@
 ﻿namespace GigiTrucks.Services.Carts.Application.DTOs;
 
-public record CartItemDto(Guid ProductId, int Quantity);
+public record CartItemDto(Guid ProductId, int Quantity, int OrderNo);
