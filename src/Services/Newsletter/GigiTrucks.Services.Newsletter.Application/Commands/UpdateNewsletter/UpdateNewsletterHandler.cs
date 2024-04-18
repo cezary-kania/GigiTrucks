@@ -19,8 +19,11 @@ public class UpdateNewsletterHandler(
         {
             throw new NewsletterNotFoundException(request.NewsletterId);
         }
-        
-        newsletter.UpdateBody(request.Title, request.Content);
-        await newsletterRepository.UpdateAsync(newsletter);
+
+        if (request.Title != newsletter.Title || request.Content != newsletter.Content)
+        {
+            newsletter.UpdateBody(request.Title, request.Content);
+            await newsletterRepository.UpdateAsync(newsletter);
+        }
     }
 }
