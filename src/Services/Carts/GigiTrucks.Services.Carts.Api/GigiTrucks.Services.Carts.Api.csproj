@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\GigiTrucks.Services.Carts.Application\GigiTrucks.Services.Carts.Application.csproj" />
+      <ProjectReference Include="..\GigiTrucks.Services.Carts.Infrastructure\GigiTrucks.Services.Carts.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

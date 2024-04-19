@@ -5,8 +5,8 @@ namespace GigiTrucks.Services.Carts.Domain.Repositories;
 
 public interface ICartRepository
 {
-    Task<Cart?> GetAsync(CartId cartId);
+    Task<Cart?> GetAsync(CustomerId customerId);
     Task AddAsync(Cart cart);
     Task UpdateAsync(Cart cart);
-    Task DeleteAsync(CartId cartId);
+    Task DeleteAsync(CustomerId customerId);
 }

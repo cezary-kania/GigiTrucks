@@ -5,13 +5,16 @@ using GigiTrucks.Services.Carts.Application.Commands.DeleteCart;
 using GigiTrucks.Services.Carts.Application.Commands.SubmitCart;
 using GigiTrucks.Services.Carts.Application.Commands.UpdateCart;
 using GigiTrucks.Services.Carts.Application.Queries;
+using GigiTrucks.Services.Carts.Infrastructure;
 using GigiTrucks.Services.Common.Identity;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddApplication();
+builder.Services
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
