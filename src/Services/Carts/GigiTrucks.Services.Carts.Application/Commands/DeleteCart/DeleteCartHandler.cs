@@ -1,11 +1,19 @@
-﻿using MediatR;
+﻿using GigiTrucks.Services.Carts.Application.Exceptions;
+using GigiTrucks.Services.Carts.Domain.Repositories;
+using MediatR;
 
 namespace GigiTrucks.Services.Carts.Application.Commands.DeleteCart;
 
-internal sealed class DeleteCartHandler : IRequestHandler<DeleteCart>
+internal sealed class DeleteCartHandler(ICartRepository cartRepository) : IRequestHandler<DeleteCart>
 {
-    public Task Handle(DeleteCart request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteCart request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var cart = await cartRepository.GetAsync(request.CustomerId);
+        if (cart is null)
+        {
+            throw new CartNotCreatedException();
+        }
+
+        await cartRepository.DeleteAsync(cart.CustomerId);
     }
 }

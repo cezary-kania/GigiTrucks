@@ -1,11 +1,22 @@
-﻿using MediatR;
+﻿using GigiTrucks.Services.Carts.Application.Exceptions;
+using GigiTrucks.Services.Carts.Domain.Enums;
+using GigiTrucks.Services.Carts.Domain.Repositories;
+using MediatR;
 
 namespace GigiTrucks.Services.Carts.Application.Commands.SubmitCart;
 
-public class SubmitCartHandler : IRequestHandler<SubmitCart>
+public class SubmitCartHandler(ICartRepository cartRepository) : IRequestHandler<SubmitCart>
 {
-    public Task Handle(SubmitCart request, CancellationToken cancellationToken)
+    public async Task Handle(SubmitCart request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var cart = await cartRepository.GetAsync(request.CustomerId);
+        if (cart is null)
+        {
+            throw new CartNotCreatedException();
+        }
+
+        cart.Submit();
+
+        await cartRepository.UpdateAsync(cart);
     }
 }

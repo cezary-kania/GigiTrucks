@@ -3,4 +3,4 @@ using MediatR;
 
 namespace GigiTrucks.Services.Carts.Application.Queries;
 
-public class GetCart(Guid customerId) : IRequest<CartDetailsDto>;
+public record GetCart(Guid CustomerId) : IRequest<CartDetailsDto>;
