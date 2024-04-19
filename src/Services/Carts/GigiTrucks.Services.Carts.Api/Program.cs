@@ -3,7 +3,7 @@ using GigiTrucks.Services.Carts.Application;
 using GigiTrucks.Services.Carts.Application.Commands.CreateCart;
 using GigiTrucks.Services.Carts.Application.Commands.DeleteCart;
 using GigiTrucks.Services.Carts.Application.Commands.SubmitCart;
-using GigiTrucks.Services.Carts.Application.Commands.UpdateCart;
+using GigiTrucks.Services.Carts.Application.Commands.UpdateCartItems;
 using GigiTrucks.Services.Carts.Application.Queries;
 using GigiTrucks.Services.Carts.Infrastructure;
 using GigiTrucks.Services.Common.Identity;
@@ -48,7 +48,7 @@ cartGroup.MapPut("/", async (
     [FromServices] ISender sender) =>
     {
         var customerId = currentUserService.UserId;
-        var updateCartCommand = request.Adapt<UpdateCart>() with { CustomerId = customerId!.Value };
+        var updateCartCommand = request.Adapt<UpdateCartItems>() with { CustomerId = customerId!.Value };
         await sender.Send(updateCartCommand);
         return Results.NoContent();
     }).WithName("UpdateCart");

@@ -4,11 +4,11 @@ using GigiTrucks.Services.Carts.Domain.ValueTypes;
 using Mapster;
 using MediatR;
 
-namespace GigiTrucks.Services.Carts.Application.Commands.UpdateCart;
+namespace GigiTrucks.Services.Carts.Application.Commands.UpdateCartItems;
 
-public class UpdateCartHandler(ICartRepository cartRepository) : IRequestHandler<UpdateCart>
+public class UpdateCartItemsHandler(ICartRepository cartRepository) : IRequestHandler<UpdateCartItems>
 {
-    public async Task Handle(UpdateCart request, CancellationToken cancellationToken)
+    public async Task Handle(Commands.UpdateCartItems.UpdateCartItems request, CancellationToken cancellationToken)
     {
         var cart = await cartRepository.GetAsync(request.CustomerId);
         if (cart is null)
