@@ -5,6 +5,7 @@ using GigiTrucks.Services.Carts.Application.Commands.DeleteCart;
 using GigiTrucks.Services.Carts.Application.Commands.SubmitCart;
 using GigiTrucks.Services.Carts.Application.Commands.UpdateCart;
 using GigiTrucks.Services.Carts.Application.Queries;
+using GigiTrucks.Services.Common.Identity;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,45 +20,51 @@ app.MapGet("/", () => "Carts");
 var cartGroup = app.MapGroup("api/cart")
     .WithTags("Cart");
 
-cartGroup.MapGet("/{cartId:Guid}", async (
-    [FromRoute] Guid cartId,
-    [FromServices] ISender sender) 
-        => Results.Ok(await sender.Send(new GetCart(cartId))))
-    .WithName("GetCart");
+cartGroup.MapGet("/", async (
+    [FromServices] ICurrentUserService currentUserService,
+    [FromServices] ISender sender) =>
+    {
+        var customerId = currentUserService.UserId;
+        return  Results.Ok(await sender.Send(new GetCart(customerId!.Value)));
+    }).WithName("GetCart");
 
 cartGroup.MapPost("/", async (
     [FromBody] CreateCartRequest request,
+    [FromServices] ICurrentUserService currentUserService,
     [FromServices] ISender sender) =>
     {
-        var customerId = Guid.NewGuid(); // FIXME: Replace with current user Id
-        var createCartCommand = request.Adapt<CreateCart>() with { CustomerId = customerId, CartId = Guid.NewGuid() };
+        var customerId = currentUserService.UserId;
+        var createCartCommand = request.Adapt<CreateCart>() with { CustomerId = customerId!.Value };
         await sender.Send(createCartCommand);
-        return Results.CreatedAtRoute("Get Cart", createCartCommand.CartId);
+        return Results.CreatedAtRoute("GetCart");
     }).WithName("CreateCart");
 
-cartGroup.MapPut("/{cartId:Guid}", async (
-    [FromRoute] Guid cartId,
+cartGroup.MapPut("/", async (
     [FromBody] UpdateCartRequest request,
+    [FromServices] ICurrentUserService currentUserService,
     [FromServices] ISender sender) =>
     {
-        var updateCartCommand = request.Adapt<UpdateCart>() with { CartId = cartId };
+        var customerId = currentUserService.UserId;
+        var updateCartCommand = request.Adapt<UpdateCart>() with { CustomerId = customerId!.Value };
         await sender.Send(updateCartCommand);
         return Results.NoContent();
     }).WithName("UpdateCart");
 
-cartGroup.MapPatch("/{cartId:Guid}/submit", async (
-    [FromRoute] Guid cartId,
+cartGroup.MapPatch("/submit", async (
+    [FromServices] ICurrentUserService currentUserService,
     [FromServices] ISender sender) =>
     {
-        await sender.Send(new SubmitCart(cartId));
+        var customerId = currentUserService.UserId;
+        await sender.Send(new SubmitCart(customerId!.Value));
         return Results.NoContent();
     }).WithName("Submit");
 
-cartGroup.MapDelete("/{cartId:Guid}", async (
-    [FromRoute] Guid cartId,
+cartGroup.MapDelete("/", async (
+    [FromServices] ICurrentUserService currentUserService,
     [FromServices] ISender sender) =>
     {
-        await sender.Send(new DeleteCart(cartId));
+        var customerId = currentUserService.UserId;
+        await sender.Send(new DeleteCart(customerId!.Value));
         return Results.NoContent();
     }).WithName("Delete");
 

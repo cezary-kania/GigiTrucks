@@ -3,4 +3,4 @@ using MediatR;
 
 namespace GigiTrucks.Services.Carts.Application.Commands.CreateCart;
 
-public record CreateCart(Guid CartId, Guid CustomerId, IList<CartItemDto> Items) : IRequest;
+public record CreateCart(Guid CustomerId, IList<CartItemDto> Items) : IRequest;

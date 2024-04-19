@@ -6,7 +6,6 @@ namespace GigiTrucks.Services.Carts.Domain.Entities;
 
 public class Cart
 {
-    public CartId Id { get; }
     public CustomerId CustomerId { get; }
     public CartStatus Status { get; private set; }
     public List<CartItem> Items { get; private set; } = [];
@@ -15,9 +14,8 @@ public class Cart
     {
     }
     
-    public Cart(CartId id, CustomerId customerId, List<CartItem> items)
+    public Cart(CustomerId customerId, List<CartItem> items)
     {
-        Id = id;
         CustomerId = customerId;
         Status = CartStatus.New;
         SetItems(items);

@@ -10,7 +10,7 @@ internal sealed class CreateCartHandler(ICartRepository cartRepository) : IReque
 {
     public async Task Handle(CreateCart request, CancellationToken cancellationToken)
     {
-        var cart = new Cart(request.CartId, request.CustomerId, request.Items.Adapt<List<CartItem>>());
+        var cart = new Cart(request.CustomerId, request.Items.Adapt<List<CartItem>>());
         await cartRepository.AddAsync(cart);
     }
 }
