@@ -1,11 +1,14 @@
 ﻿using GigiTrucks.Services.Carts.Application.Exceptions;
-using GigiTrucks.Services.Carts.Domain.Enums;
+using GigiTrucks.Services.Carts.Contracts.Events;
 using GigiTrucks.Services.Carts.Domain.Repositories;
+using MassTransit;
 using MediatR;
 
 namespace GigiTrucks.Services.Carts.Application.Commands.SubmitCart;
 
-public class SubmitCartHandler(ICartRepository cartRepository) : IRequestHandler<SubmitCart>
+public class SubmitCartHandler(
+    ICartRepository cartRepository, 
+    IPublishEndpoint publishEndpoint) : IRequestHandler<SubmitCart>
 {
     public async Task Handle(SubmitCart request, CancellationToken cancellationToken)
     {
@@ -18,5 +21,9 @@ public class SubmitCartHandler(ICartRepository cartRepository) : IRequestHandler
         cart.Submit();
 
         await cartRepository.UpdateAsync(cart);
+        
+        await publishEndpoint.Publish(
+            new CartSubmittedEvent { CartId = request.CustomerId }, 
+            cancellationToken);
     }
 }

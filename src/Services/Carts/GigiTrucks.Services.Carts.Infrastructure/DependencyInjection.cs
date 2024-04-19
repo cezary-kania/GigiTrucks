@@ -1,6 +1,7 @@
 ﻿using GigiTrucks.Services.Carts.Domain.Repositories;
 using GigiTrucks.Services.Carts.Infrastructure.DAL.Redis;
 using GigiTrucks.Services.Carts.Infrastructure.DAL.Redis.Repositories;
+using GigiTrucks.Services.Carts.Infrastructure.Messaging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +14,7 @@ public static class DependencyInjection
         ConfigurationManager configuration)
     {
         services.AddRedis(configuration);
+        services.AddMessaging(configuration);
         services.AddScoped<ICartRepository,CartRepository>();
         return services;
     }
