@@ -21,6 +21,6 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.HasOne(x => x.Category)
             .WithMany(x => x.Products);
         
-        builder.OwnsMany(x => x.Images);
+        builder.HasMany(x => x.Images);
     }
 }
