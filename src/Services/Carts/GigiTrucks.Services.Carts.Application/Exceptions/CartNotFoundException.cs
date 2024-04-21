@@ -2,5 +2,5 @@
 
 namespace GigiTrucks.Services.Carts.Application.Exceptions;
 
-public class CartNotCreatedException() 
-    : ResourceNotFoundException("Cart not created.");
+public class CartNotFoundException() 
+    : ResourceNotFoundException("Cart was not found.");

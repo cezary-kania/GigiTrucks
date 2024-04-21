@@ -8,12 +8,12 @@ namespace GigiTrucks.Services.Carts.Application.Commands.UpdateCartItems;
 
 public class UpdateCartItemsHandler(ICartRepository cartRepository) : IRequestHandler<UpdateCartItems>
 {
-    public async Task Handle(Commands.UpdateCartItems.UpdateCartItems request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateCartItems request, CancellationToken cancellationToken)
     {
         var cart = await cartRepository.GetAsync(request.CustomerId);
         if (cart is null)
         {
-            throw new CartNotCreatedException();
+            throw new CartNotFoundException();
         }
 
         cart.SetItems(request.Items.Adapt<List<CartItem>>());

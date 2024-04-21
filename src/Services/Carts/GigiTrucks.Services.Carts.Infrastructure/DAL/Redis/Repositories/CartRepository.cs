@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using GigiTrucks.Services.Carts.Domain.Entities;
-using GigiTrucks.Services.Carts.Domain.Enums;
 using GigiTrucks.Services.Carts.Domain.Repositories;
 using GigiTrucks.Services.Carts.Domain.ValueTypes;
 using Microsoft.Extensions.Caching.Distributed;
@@ -8,7 +7,8 @@ using Microsoft.Extensions.Options;
 
 namespace GigiTrucks.Services.Carts.Infrastructure.DAL.Redis.Repositories;
 
-public class CartRepository(IDistributedCache distributedCache, IOptions<RedisSettings> redisSettings) : ICartRepository
+public class CartRepository(IDistributedCache distributedCache, IOptions<RedisSettings> redisSettings) 
+    : ICartRepository
 {
     private readonly DistributedCacheEntryOptions _distributedCacheEntryOptions = new()
     {
@@ -31,8 +31,11 @@ public class CartRepository(IDistributedCache distributedCache, IOptions<RedisSe
 
     public async Task UpdateAsync(Cart cart) => await SaveCart(cart);
 
-    public async Task DeleteAsync(CustomerId customerId) 
-        => await distributedCache.RemoveAsync(customerId.ToString());
+    public async Task DeleteAsync(Cart cart)
+    {
+        await distributedCache.RemoveAsync(cart.CustomerId.ToString());
+        await distributedCache.RemoveAsync(cart.Id.ToString());
+    }
 
     private async Task SaveCart(Cart cart) 
         => await distributedCache.SetStringAsync(

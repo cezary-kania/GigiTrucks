@@ -1,6 +1,7 @@
 ﻿using GigiTrucks.Services.Carts.Application.Exceptions;
 using GigiTrucks.Services.Carts.Contracts.Events;
 using GigiTrucks.Services.Carts.Domain.Repositories;
+using Mapster;
 using MassTransit;
 using MediatR;
 
@@ -15,14 +16,13 @@ public class SubmitCartHandler(
         var cart = await cartRepository.GetAsync(request.CustomerId);
         if (cart is null)
         {
-            throw new CartNotCreatedException();
+            throw new CartNotFoundException();
         }
 
         cart.Submit();
         await cartRepository.PersistAsync(cart);
-        
-        await publishEndpoint.Publish(
-            new CartSubmittedEvent { CartId = cart.Id }, 
-            cancellationToken);
+
+        var cartSubmittedEvent = cart.Adapt<CartSubmittedEvent>();
+        await publishEndpoint.Publish(cartSubmittedEvent, cancellationToken);
     }
 }

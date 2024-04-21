@@ -11,9 +11,8 @@ internal sealed class DeleteCartHandler(ICartRepository cartRepository) : IReque
         var cart = await cartRepository.GetAsync(request.CustomerId);
         if (cart is null)
         {
-            throw new CartNotCreatedException();
+            throw new CartNotFoundException();
         }
-
-        await cartRepository.DeleteAsync(cart.CustomerId);
+        await cartRepository.DeleteAsync(cart);
     }
 }

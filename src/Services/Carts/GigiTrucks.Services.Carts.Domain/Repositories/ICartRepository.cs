@@ -10,5 +10,5 @@ public interface ICartRepository
     Task PersistAsync(Cart cart);
     Task AddAsync(Cart cart);
     Task UpdateAsync(Cart cart);
-    Task DeleteAsync(CustomerId customerId);
+    Task DeleteAsync(Cart cart);
 }
