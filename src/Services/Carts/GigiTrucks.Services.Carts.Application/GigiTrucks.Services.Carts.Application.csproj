@@ -7,7 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="GigiTrucks.Services.Common" Version="1.0.5" />
+      <PackageReference Include="GigiTrucks.Services.Common" Version="1.0.6" />
+      <PackageReference Include="GigiTrucks.Services.Orders.Contracts" Version="1.0.0" />
       <PackageReference Include="Mapster" Version="7.4.0" />
       <PackageReference Include="MassTransit.Abstractions" Version="8.2.0" />
       <PackageReference Include="MediatR" Version="12.2.0" />

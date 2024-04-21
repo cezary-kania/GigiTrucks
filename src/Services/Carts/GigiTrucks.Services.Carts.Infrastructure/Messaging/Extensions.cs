@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+﻿using GigiTrucks.Services.Common.Messaging;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +14,7 @@ public static class Extensions
         var rabbitMQSetting = services.BuildServiceProvider().GetRequiredService<IOptions<RabbitMQSettings>>().Value;
         services.AddMassTransit(x =>
         {
+            x.AddConsumers(GetConsumers());
             x.SetKebabCaseEndpointNameFormatter();
             x.UsingRabbitMq((context, cfg) =>
             {
@@ -27,4 +28,10 @@ public static class Extensions
         });
         return services;
     }
+
+    private static Type[] GetConsumers() 
+        => AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(s => s.GetTypes())
+            .Where(t => t.IsClass && !t.IsAbstract && typeof(IIntegrationEventHandler).IsAssignableFrom(t))
+            .ToArray();
 }
