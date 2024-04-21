@@ -5,6 +5,7 @@ using GigiTrucks.Services.Carts.Application.Commands.DeleteCart;
 using GigiTrucks.Services.Carts.Application.Commands.SubmitCart;
 using GigiTrucks.Services.Carts.Application.Commands.UpdateCartItems;
 using GigiTrucks.Services.Carts.Application.Queries;
+using GigiTrucks.Services.Carts.Application.Queries.GetCart;
 using GigiTrucks.Services.Carts.Infrastructure;
 using GigiTrucks.Services.Common.Identity;
 using Mapster;

@@ -19,11 +19,10 @@ public class SubmitCartHandler(
         }
 
         cart.Submit();
-
-        await cartRepository.UpdateAsync(cart);
+        await cartRepository.PersistAsync(cart);
         
         await publishEndpoint.Publish(
-            new CartSubmittedEvent { CartId = request.CustomerId }, 
+            new CartSubmittedEvent { CartId = cart.Id }, 
             cancellationToken);
     }
 }
