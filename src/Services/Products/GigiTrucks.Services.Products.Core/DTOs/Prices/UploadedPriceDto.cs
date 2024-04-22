@@ -1,6 +1,6 @@
-﻿namespace GigiTrucks.Services.Products.Core.Features.Prices.UploadPriceFile;
+﻿namespace GigiTrucks.Services.Products.Core.DTOs.Prices;
 
-public record UploadedPrice
+public record UploadedPriceDto
 {
     public Guid Id { get; init; }
     public Guid ProductId { get; set; }

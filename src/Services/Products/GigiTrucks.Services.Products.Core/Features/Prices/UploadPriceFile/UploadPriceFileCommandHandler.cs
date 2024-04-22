@@ -2,6 +2,7 @@
 using CsvHelper;
 using FluentValidation;
 using GigiTrucks.Services.Products.Core.DAL.EF;
+using GigiTrucks.Services.Products.Core.DTOs.Prices;
 using GigiTrucks.Services.Products.Core.Entities;
 using Mapster;
 using MediatR;
@@ -45,10 +46,10 @@ internal sealed class UploadPriceFileCommandHandler(
         return new Success();
     }
 
-    private static IEnumerable<UploadedPrice>? ParsePriceFile(IFormFile file)
+    private static IEnumerable<UploadedPriceDto>? ParsePriceFile(IFormFile file)
     {
         var reader = new StreamReader(file.OpenReadStream());
         return new CsvReader(reader, CultureInfo.InvariantCulture)
-            .GetRecords<UploadedPrice>();
+            .GetRecords<UploadedPriceDto>();
     }
 }
