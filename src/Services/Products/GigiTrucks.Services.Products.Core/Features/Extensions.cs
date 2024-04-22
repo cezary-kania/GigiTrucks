@@ -10,6 +10,7 @@ internal static class Extensions
 {
     public static IServiceCollection AddFeatures(this IServiceCollection services)
     {
+        services.AddSingleton(TimeProvider.System);
         services.AddCarter();
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddMediatR(cfg =>
