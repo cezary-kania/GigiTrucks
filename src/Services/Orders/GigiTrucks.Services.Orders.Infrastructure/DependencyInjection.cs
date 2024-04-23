@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using GigiTrucks.Services.Common.Messaging;
 using GigiTrucks.Services.Orders.Domain.Repositories;
 using GigiTrucks.Services.Orders.Infrastructure.DAL.EF;
 using GigiTrucks.Services.Orders.Infrastructure.DAL.EF.Interceptors;
@@ -15,6 +16,7 @@ public static class DependencyInjection
         this IServiceCollection services,
         ConfigurationManager configuration)
     {
+        services.AddMessaging(configuration);
         services.AddSingleton(TimeProvider.System);
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
