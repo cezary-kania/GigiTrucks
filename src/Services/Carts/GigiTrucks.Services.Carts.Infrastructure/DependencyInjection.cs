@@ -1,7 +1,7 @@
 ﻿using GigiTrucks.Services.Carts.Domain.Repositories;
 using GigiTrucks.Services.Carts.Infrastructure.DAL.Redis;
 using GigiTrucks.Services.Carts.Infrastructure.DAL.Redis.Repositories;
-using GigiTrucks.Services.Carts.Infrastructure.Messaging;
+using GigiTrucks.Services.Common.Messaging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

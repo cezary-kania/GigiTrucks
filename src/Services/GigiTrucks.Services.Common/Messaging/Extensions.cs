@@ -1,20 +1,23 @@
-﻿using GigiTrucks.Services.Common.Messaging;
+﻿using System.Reflection;
+using GigiTrucks.Services.Carts.Infrastructure.Messaging;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace GigiTrucks.Services.Carts.Infrastructure.Messaging;
+namespace GigiTrucks.Services.Common.Messaging;
 
 public static class Extensions
 {
-    public static IServiceCollection AddMessaging(this IServiceCollection services, ConfigurationManager configuration)
+    public static IServiceCollection AddMessaging(
+        this IServiceCollection services, 
+        ConfigurationManager configuration)
     {
         services.Configure<RabbitMQSettings>(configuration.GetSection(nameof(RabbitMQSettings)));
         var rabbitMQSetting = services.BuildServiceProvider().GetRequiredService<IOptions<RabbitMQSettings>>().Value;
         services.AddMassTransit(x =>
         {
-            x.AddConsumers(GetConsumers());
+            x.AddConsumers(GetAppAssemblies());
             x.SetKebabCaseEndpointNameFormatter();
             x.UsingRabbitMq((context, cfg) =>
             {
@@ -29,9 +32,8 @@ public static class Extensions
         return services;
     }
 
-    private static Type[] GetConsumers() 
+    private static Assembly[] GetAppAssemblies() 
         => AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(s => s.GetTypes())
-            .Where(t => t.IsClass && !t.IsAbstract && typeof(IIntegrationEventHandler).IsAssignableFrom(t))
+            .Where(x => x.FullName.StartsWith(nameof(GigiTrucks)))
             .ToArray();
 }

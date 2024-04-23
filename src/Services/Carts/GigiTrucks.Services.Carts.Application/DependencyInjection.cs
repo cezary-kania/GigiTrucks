@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using GigiTrucks.Services.Carts.Application.EventHandlers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GigiTrucks.Services.Carts.Application;
@@ -10,7 +9,6 @@ public static class DependencyInjection
     {
         services.AddMediatR(config => 
             config.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-        services.AddEventHandlers();
         return services;
     }
 }
