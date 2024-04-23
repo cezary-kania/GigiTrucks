@@ -1,4 +1,4 @@
-﻿namespace GigiTrucks.Services.Carts.Infrastructure.Messaging;
+﻿namespace GigiTrucks.Services.Common.Messaging;
 
 public record RabbitMQSettings
 {

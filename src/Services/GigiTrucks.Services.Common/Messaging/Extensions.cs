@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using GigiTrucks.Services.Carts.Infrastructure.Messaging;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
