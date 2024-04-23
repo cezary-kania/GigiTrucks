@@ -16,6 +16,11 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .HasConversion(x => x.Value,
                 x => new OrderId(x));
         
+        builder.Property(x => x.CustomerId)
+            .IsRequired()
+            .HasConversion(x => x.Value,
+                x => new CustomerId(x));
+        
         builder.Property(x => x.Status)
             .HasConversion<int>();
     }

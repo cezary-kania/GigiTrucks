@@ -8,6 +8,7 @@ namespace GigiTrucks.Services.Orders.Domain.Entities;
 public class Order : AuditableEntity
 {
     public OrderId Id { get; }
+    public CustomerId CustomerId { get; private set; }
     public OrderStatus Status { get; private set; }
     public Currency Currency { get; private set; }
     public IList<OrderLine> OrderLines { get; } = new List<OrderLine>();
@@ -16,9 +17,10 @@ public class Order : AuditableEntity
     {
     }
 
-    public Order(OrderId id, Currency currency, IList<OrderLine> orderLines)
+    public Order(OrderId id, CustomerId customerId, Currency currency, IList<OrderLine> orderLines)
     {
         Id = id;
+        CustomerId = customerId;
         OrderLines = orderLines;
         Status = OrderStatus.Created;
         Currency = currency;
