@@ -29,8 +29,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () => "Carts");
-
 var cartGroup = app.MapGroup("api/cart")
     .WithTags("Cart");
 

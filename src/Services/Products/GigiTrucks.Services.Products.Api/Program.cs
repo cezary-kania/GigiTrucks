@@ -15,9 +15,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.MapGet("/", () => "Products");
-
 app.UseCore();
 
 app.Run();

@@ -36,8 +36,6 @@ app.MapHealthChecks("/health", new HealthCheckOptions
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponseNoExceptionDetails
 });
 
-app.MapGet("/", () => "Hello Users!");
-
 app.MapPost("/sign-in", async (
         [FromBody] SignIn command,
         [FromServices] ISender sender) => await sender.Send(command))

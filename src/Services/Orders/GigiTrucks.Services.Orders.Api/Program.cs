@@ -34,8 +34,6 @@ app.MapHealthChecks("/health", new HealthCheckOptions
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponseNoExceptionDetails
 });
 
-app.MapGet("/", () => "Hello Orders!");
-
 var ordersGroup = app.MapGroup("api/order")
     .WithTags("Orders");
 

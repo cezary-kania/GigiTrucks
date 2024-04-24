@@ -31,8 +31,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () => "Newsletter");
-
 app.MapPost("/subscribe", async (
         [FromServices] ICurrentUserService currentUserService,
         [FromServices] ISender sender) =>
