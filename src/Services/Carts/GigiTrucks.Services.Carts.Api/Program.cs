@@ -41,8 +41,7 @@ cartGroup.MapGet("/", async (
         var customerId = currentUserService.UserId;
         return  Results.Ok(await sender.Send(new GetCart(customerId!.Value)));
     })
-    .WithName("GetCart")
-    .WithTags("Cart");
+    .WithName("GetCart");
 
 cartGroup.MapPost("/", async (
     [FromBody] CreateCartRequest request,
@@ -54,8 +53,7 @@ cartGroup.MapPost("/", async (
         await sender.Send(createCartCommand);
         return Results.CreatedAtRoute("GetCart");
     })
-    .WithName("CreateCart")
-    .WithTags("Cart");
+    .WithName("CreateCart");
 
 cartGroup.MapPut("/", async (
     [FromBody] UpdateCartRequest request,
@@ -67,8 +65,7 @@ cartGroup.MapPut("/", async (
         await sender.Send(updateCartCommand);
         return Results.NoContent();
     })
-    .WithName("UpdateCart")
-    .WithTags("Cart");
+    .WithName("UpdateCart");
 
 cartGroup.MapPatch("/submit", async (
     [FromServices] ICurrentUserService currentUserService,
@@ -78,8 +75,7 @@ cartGroup.MapPatch("/submit", async (
         await sender.Send(new SubmitCart(customerId!.Value));
         return Results.NoContent();
     })
-    .WithName("Submit")
-    .WithTags("Cart");
+    .WithName("Submit");
 
 cartGroup.MapDelete("/", async (
     [FromServices] ICurrentUserService currentUserService,
@@ -89,7 +85,6 @@ cartGroup.MapDelete("/", async (
         await sender.Send(new DeleteCart(customerId!.Value));
         return Results.NoContent();
     })
-    .WithName("Delete")
-    .WithTags("Cart");
+    .WithName("Delete");
 
 app.Run();
