@@ -11,5 +11,13 @@ Truck online shop.
 - Redis
 - MS SQL
 
+### Services
+- Users
+- Products
+- Orders
+- Carts
+- Discounts
+- Newsletter
+
 ### License
 This project is licensed under the [MIT License](https://github.com/cezary-kania/GigiTrucks/LICENSE).
