@@ -56,11 +56,7 @@ public class SignInTests(UsersApiFactory factory) : IClassFixture<UsersApiFactor
             .Should()
             .Be(HttpStatusCode.OK);
 
-        var responseString = await response.Content.ReadAsStringAsync();
-        var authResult = JsonSerializer.Deserialize<JwtDto>(responseString, new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        var authResult = await response.Content.ReadFromJsonAsync<JwtDto>();
         authResult.Should().NotBeNull();
         authResult?.AccessToken.Should().NotBeEmpty();
         authResult?.UserId.Should().NotBeEmpty();

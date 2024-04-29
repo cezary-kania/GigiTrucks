@@ -10,11 +10,6 @@ namespace GigiTrucks.Services.Products.Tests.Integration.Categories;
 public class GetTopLevelCategoriesTests(ProductsApiFactory factory) : IClassFixture<ProductsApiFactory>
 {
     private readonly HttpClient _client = factory.CreateClient();
-
-    private readonly JsonSerializerOptions _serializerOptions = new()
-    {
-        PropertyNameCaseInsensitive = true
-    };
     
     [Fact]
     public async Task GetTopLevelCategories_ShouldReturnCategoriesWithNoParent()
@@ -43,10 +38,8 @@ public class GetTopLevelCategoriesTests(ProductsApiFactory factory) : IClassFixt
             .Should()
             .Be(HttpStatusCode.OK);
         
-        var responseString = await response.Content.ReadAsStringAsync();
-        var topLevelCategories = JsonSerializer.Deserialize<IEnumerable<CategoryWithoutProductsDto>>(
-            responseString, 
-            _serializerOptions)!.ToList();
+        var topLevelCategories = await response.Content.ReadFromJsonAsync<IList<CategoryWithoutProductsDto>>();
+
 
         topLevelCategories
             .Should()

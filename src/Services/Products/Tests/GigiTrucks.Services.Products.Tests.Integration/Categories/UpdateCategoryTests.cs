@@ -11,11 +11,6 @@ public class UpdateCategoryTests(ProductsApiFactory factory) : IClassFixture<Pro
 {
     private readonly HttpClient _client = factory.CreateClient();
     
-    private readonly JsonSerializerOptions _serializerOptions = new()
-    {
-        PropertyNameCaseInsensitive = true
-    };
-    
     [Fact]
     public async Task UpdateCategory_ShouldChangeCategoryDetails_WhenNewPropertiesAreValid()
     {
@@ -44,10 +39,10 @@ public class UpdateCategoryTests(ProductsApiFactory factory) : IClassFixture<Pro
             .Be(HttpStatusCode.OK);
         
         var getParentCategoryResponse = await _client.GetAsync($"api/category/{parentCategoryId}");
-        var responseString = await getParentCategoryResponse.Content.ReadAsStringAsync();
-        var categoryDto = JsonSerializer.Deserialize<CategoryDto>(responseString, _serializerOptions)!;
-
-        categoryDto.SubCategories
+        var categoryDto = await getParentCategoryResponse.Content.ReadFromJsonAsync<CategoryDto>();
+        
+        categoryDto.Should().NotBeNull();
+        categoryDto!.SubCategories
             .Should()
             .HaveCount(1)
             .And

@@ -10,11 +10,6 @@ namespace GigiTrucks.Services.Products.Tests.Integration.Categories;
 public class GetCategoryDetailsTests(ProductsApiFactory factory) : IClassFixture<ProductsApiFactory>
 {
     private readonly HttpClient _client = factory.CreateClient();
-
-    private readonly JsonSerializerOptions _serializerOptions = new()
-    {
-        PropertyNameCaseInsensitive = true
-    };
     
     [Fact]
     public async Task GetCategory_ShouldReturnCategoryDetails_WhenCategoryExists()
@@ -45,9 +40,9 @@ public class GetCategoryDetailsTests(ProductsApiFactory factory) : IClassFixture
             .Should()
             .Be(HttpStatusCode.OK);
         
-        var responseString = await response.Content.ReadAsStringAsync();
-        var categoryDto = JsonSerializer.Deserialize<CategoryDto>(responseString, _serializerOptions)!;
-
+        var categoryDto = await response.Content.ReadFromJsonAsync<CategoryDto>();
+        
+        categoryDto.Should().NotBeNull();
         categoryDto.Name
             .Should()
             .Be(categoryName);
