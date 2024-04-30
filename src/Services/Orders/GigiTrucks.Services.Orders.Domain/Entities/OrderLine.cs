@@ -1,4 +1,4 @@
-﻿using GigiTrucks.Services.Orders.Domain.Entities.Common;
+﻿using GigiTrucks.Services.Common.Domain.Entities;
 using GigiTrucks.Services.Orders.Domain.ValueTypes;
 
 namespace GigiTrucks.Services.Orders.Domain.Entities;

@@ -1,4 +1,4 @@
-﻿namespace GigiTrucks.Services.Orders.Domain.Entities.Common;
+﻿namespace GigiTrucks.Services.Common.Domain.Entities;
 
 public abstract class AuditableEntity
 {

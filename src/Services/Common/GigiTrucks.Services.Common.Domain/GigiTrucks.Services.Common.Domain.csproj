@@ -4,10 +4,9 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageId>GigiTrucks.Services.Common.Domain</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Cezary Kania</Authors>
     </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="GigiTrucks.Services.Common.Domain" Version="0.0.1" />
-    </ItemGroup>
 
 </Project>
