@@ -28,7 +28,6 @@ public class Order : AuditableEntity
 
     public void AddOrderLine(OrderLine orderLine)
     {
-        var existingOrderLine = OrderLines.FirstOrDefault(ol => ol.Id == orderLine.Id);
         if (OrderLines.Any(ol => ol.Id == orderLine.Id))
         {
             throw new OrderLineAlreadyAddedException(orderLine.Id);

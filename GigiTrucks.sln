@@ -90,6 +90,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Carts.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Orders.Contracts", "src\Services\Orders\GigiTrucks.Services.Orders.Contracts\GigiTrucks.Services.Orders.Contracts.csproj", "{BC078860-DF23-42D2-891D-A0FB44CD25FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GigiTrucks.Services.Orders.Tests.Unit", "src\Services\Orders\Tests\GigiTrucks.Services.Orders.Tests.Unit\GigiTrucks.Services.Orders.Tests.Unit.csproj", "{D41D69C7-E041-4D72-916A-F8DC740CEE93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -224,6 +226,10 @@ Global
 		{BC078860-DF23-42D2-891D-A0FB44CD25FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC078860-DF23-42D2-891D-A0FB44CD25FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC078860-DF23-42D2-891D-A0FB44CD25FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D41D69C7-E041-4D72-916A-F8DC740CEE93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D41D69C7-E041-4D72-916A-F8DC740CEE93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D41D69C7-E041-4D72-916A-F8DC740CEE93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D41D69C7-E041-4D72-916A-F8DC740CEE93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FD30EBFF-FF59-4DD2-8739-D7DAECE0F02E} = {3BFA9B40-7B1C-4512-B22E-AD98C5497C7F}
@@ -269,5 +275,6 @@ Global
 		{A7380B23-2FB4-4D4F-A5FE-B883C2A35A31} = {F15B7FD9-BDEF-4E9B-B107-BAE12AC9312E}
 		{E2769C17-66F4-47A2-B9C7-32B1E4CE725D} = {F15B7FD9-BDEF-4E9B-B107-BAE12AC9312E}
 		{BC078860-DF23-42D2-891D-A0FB44CD25FD} = {B2624AFA-D0B6-401F-812F-8AE45A0DD1BA}
+		{D41D69C7-E041-4D72-916A-F8DC740CEE93} = {9264DC41-973F-40B1-9425-F4070A02CCB3}
 	EndGlobalSection
 EndGlobal
