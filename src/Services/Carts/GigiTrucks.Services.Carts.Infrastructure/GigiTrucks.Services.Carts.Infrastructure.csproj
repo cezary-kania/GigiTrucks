@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="GigiTrucks.Services.Common" Version="1.0.7" />
+      <PackageReference Include="GigiTrucks.Services.Common" Version="1.0.8" />
       <PackageReference Include="MassTransit" Version="8.2.1" />
       <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.1" />
       <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.4" />

@@ -9,8 +9,8 @@
     <ItemGroup>
         <PackageReference Include="FluentValidation" Version="11.9.0" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
-        <PackageReference Include="GigiTrucks.Services.Common" Version="1.0.5" />
-        <PackageReference Include="MassTransit" Version="8.2.0" />
+        <PackageReference Include="GigiTrucks.Services.Common" Version="1.0.8" />
+        <PackageReference Include="MassTransit" Version="8.2.1" />
         <PackageReference Include="MediatR" Version="12.2.0"/>
         <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1"/>
