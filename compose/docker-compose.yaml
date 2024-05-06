@@ -44,7 +44,7 @@ services:
         
   rabbitmq:
     image: rabbitmq:3.11.8-management
-    container_name: gigitrucks.rabbitmq
+    container_name: rabbitmq
     restart: unless-stopped
     ports:
       - 5672:5672
@@ -65,11 +65,117 @@ services:
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERT_PASSWORD}
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
-      - ConnectionStrings__Postgres=${DB_CONNECTIONS_STRING}
+      - ConnectionStrings__Postgres=${USERS_DB_CONNECTIONS_STRING}
       - JwtSettings__Secret=${AUTH_SECRET}
     volumes:
       - ~/.aspnet/https:/https:ro
+  
+  discounts:
+    image: ${DOCKER_REGISTRY}/gigitruck.discounts
+    container_name: gigitruck.discounts
+    build:
+      context: ../
+      dockerfile: src/Services/Discounts/GigiTrucks.Services.Discounts.Api/Dockerfile
+    restart: on-failure
+    ports:
+      - "5051:80"
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERT_PASSWORD}
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
 
+  carts:
+    image: ${DOCKER_REGISTRY}/gigitruck.carts
+    container_name: gigitruck.carts
+    build:
+      context: ../
+      dockerfile: src/Services/Carts/GigiTrucks.Services.Carts.Api/Dockerfile
+    depends_on:
+      - redis
+      - rabbitmq
+    restart: on-failure
+    ports:
+      - "5052:80"
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERT_PASSWORD}
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - RedisSettings__ConnectionString=${REDIS_CONNECTIONS_STRING}
+      - RabbitMQSettings__Host=rabbitmq
+      - RabbitMQSettings__Username=${RABBITMQ_USERNAME}
+      - RabbitMQSettings__Password=${RABBITMQ_PASSWORD}
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  newsletter:
+    image: ${DOCKER_REGISTRY}/gigitruck.newsletter
+    container_name: gigitruck.newsletter
+    build:
+      context: ../
+      dockerfile: src/Services/Newsletter/GigiTrucks.Services.Newsletter.Api/Dockerfile
+    depends_on:
+      - postgres-db
+      - rabbitmq
+    restart: on-failure
+    ports:
+      - "5053:80"
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERT_PASSWORD}
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ConnectionStrings__Postgres=${NEWSLETTER_DB_CONNECTIONS_STRING}
+      - RabbitMQSettings__Host=rabbitmq
+      - RabbitMQSettings__Username=${RABBITMQ_USERNAME}
+      - RabbitMQSettings__Password=${RABBITMQ_PASSWORD}
+    volumes:
+      - ~/.aspnet/https:/https:ro
+  
+  orders:
+    image: ${DOCKER_REGISTRY}/gigitruck.orders
+    container_name: gigitruck.orders
+    build:
+      context: ../
+      dockerfile: src/Services/Orders/GigiTrucks.Services.Orders.Api/Dockerfile
+    depends_on:
+      - mssql-db
+      - rabbitmq
+    restart: on-failure
+    ports:
+      - "5054:80"
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERT_PASSWORD}
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ConnectionStrings__OrdersDB=${ORDERS_DB_CONNECTIONS_STRING}
+      - RabbitMQSettings__Host=rabbitmq
+      - RabbitMQSettings__Username=${RABBITMQ_USERNAME}
+      - RabbitMQSettings__Password=${RABBITMQ_PASSWORD}
+    volumes:
+      - ~/.aspnet/https:/https:ro  
+  
+  products:
+    image: ${DOCKER_REGISTRY}/gigitruck.products
+    container_name: gigitruck.products
+    build:
+      context: ../
+      dockerfile: src/Services/Products/GigiTrucks.Services.Products.Api/Dockerfile
+    depends_on:
+      - mssql-db
+      - azurite
+    restart: on-failure
+    ports:
+      - "5055:80"
+    environment:
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERT_PASSWORD}
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ConnectionStrings__Postgres=${PRODUCTS_DB_CONNECTIONS_STRING}
+      - BlobStorageSettings__ProductImagesContainerName=files
+      - BlobStorageSettings__ConnectionString=${BLOB_STORAGE_CONNECTION_STRING}
+    volumes:
+      - ~/.aspnet/https:/https:ro
 volumes: 
   postgres_data:
   mssql_data:
