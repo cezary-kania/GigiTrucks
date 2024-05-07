@@ -49,6 +49,18 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+  
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    restart: unless-stopped
+    volumes:
+      - seq_data:/data
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 8020:80
+      - 5341:5341
 
   users:
     image: ${DOCKER_REGISTRY}/gigitruck.users
@@ -181,3 +193,4 @@ volumes:
   mssql_data:
   redis:
   azurite_data:
+  seq_data:
