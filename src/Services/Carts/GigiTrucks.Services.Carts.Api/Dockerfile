@@ -1,7 +1,7 @@
 ﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 COPY . .
-RUN dotnet publish src/Services/Carts/GigiTrucks.Services.Orders.Carts -c release -o out
+RUN dotnet publish src/Services/Carts/GigiTrucks.Services.Carts.Api -c release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
