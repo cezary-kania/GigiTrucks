@@ -19,5 +19,13 @@ Truck online shop.
 - Discounts
 - Newsletter
 
+
+### TODO
+- Authorization / Authentication
+- Implement client page
+- Implement shop admin
+- Add logic to discounts service
+- Add mailing to newsletter
+
 ### License
 This project is licensed under the [MIT License](https://github.com/cezary-kania/GigiTrucks/LICENSE).
